@@ -7,3 +7,25 @@
 //
 
 import Foundation
+import SwiftUI
+import Combine
+
+class MovieListViewModel: ObservableObject {
+    
+    @Published var popularMovies: [Movie] = [Movie]()
+    @Published var page : Int = 1
+    init() {
+        APIService().fetchPopuplarMovies(page:  1) { result in
+            self.popularMovies = result.data
+        }
+    }
+    
+    func nextPage() {
+        self.page += 1
+        APIService().fetchPopuplarMovies(page: page) { result in
+            self.popularMovies.append(contentsOf: result.data)
+        }
+    }
+    
+    let didChange = PassthroughSubject<MovieListViewModel, Never>()
+}
