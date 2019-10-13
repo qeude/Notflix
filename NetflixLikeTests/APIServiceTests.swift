@@ -19,4 +19,13 @@ class APIServiceTests: XCTestCase {
             }
         )
     }
+    
+    func testFetchImage() {
+        XCTAssertNoThrow(
+            APIService().fetchImage(imageUrl: "/dcbph9pZls8kr4Bhp0mz6nVyoLd.jpg").done { result in
+                let data = result
+                XCTAssertFalse(data.isEmpty)
+            }
+        )
+    }
 }
