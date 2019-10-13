@@ -18,7 +18,7 @@ class MovieListViewModel: ObservableObject {
 
     init() {
         self.isLoading = true
-        _ = APIService().fetchPopuplarMovies(page: 1).done { result in
+        _ = APIService().fetchPopularMovies(page: 1).done { result in
             self.popularMovies = result.data
             self.isLoading = false
         }
@@ -27,7 +27,7 @@ class MovieListViewModel: ObservableObject {
     func nextPage() {
         self.isLoading = true
         self.page += 1
-        _ = APIService().fetchPopuplarMovies(page: page).done { result in
+        _ = APIService().fetchPopularMovies(page: page).done { result in
             self.popularMovies.append(contentsOf: result.data)
             self.isLoading = false
         }

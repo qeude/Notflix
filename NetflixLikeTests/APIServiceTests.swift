@@ -13,7 +13,7 @@ class APIServiceTests: XCTestCase {
     
     func testFetchPopularMovies() {
         XCTAssertNoThrow(
-            APIService().fetchPopuplarMovies(page:  1) { result in
+            APIService().fetchPopularMovies(page:  1).done { result in
                 let popularMovies = result.data
                 XCTAssertFalse(popularMovies.isEmpty)
             }

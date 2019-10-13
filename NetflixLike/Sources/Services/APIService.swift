@@ -42,7 +42,7 @@ class APIService {
         }
     }
     
-    func fetchPopuplarMovies(page: Int = 1) -> Promise<MovieList> {
+    func fetchPopularMovies(page: Int = 1) -> Promise<MovieList> {
         guard var urlComponents = URLComponents(string: "https://api.themoviedb.org/3/movie/popular") else { return Promise<MovieList>(error: APIError.urlError(url: "/movie/popular")) }
         
         urlComponents.queryItems = [
