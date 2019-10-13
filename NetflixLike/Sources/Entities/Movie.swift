@@ -9,7 +9,7 @@
 import Foundation
 struct MovieList: Decodable {
     let data: [Movie]
-    
+
     enum CodingKeys: String, CodingKey {
         case data = "results"
     }
@@ -27,7 +27,7 @@ struct Movie: Decodable, Identifiable {
     let posterPath: String?
     let backdropPath: String?
     let releaseDate: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case title

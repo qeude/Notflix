@@ -11,10 +11,10 @@ import SwiftUI
 import Combine
 
 class ImageLoaderViewModel: ObservableObject {
-    
+
     @Published var data: Data = Data()
     @Published var isLoading: Bool = false
-    
+
     init(imageUrl: String) {
         self.isLoading = true
         _ = APIService().fetchImage(imageUrl: imageUrl).done { result in
@@ -22,6 +22,6 @@ class ImageLoaderViewModel: ObservableObject {
             self.isLoading = false
         }
     }
-    
+
     let didChange = PassthroughSubject<ImageLoaderViewModel, Never>()
 }

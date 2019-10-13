@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 class MovieListViewModel: ObservableObject {
-    
+
     @Published var popularMovies: [Movie] = [Movie]()
     @Published var page: Int = 1
     @Published var isLoading: Bool = false
@@ -23,7 +23,7 @@ class MovieListViewModel: ObservableObject {
             self.isLoading = false
         }
     }
-    
+
     func nextPage() {
         self.isLoading = true
         self.page += 1
@@ -32,6 +32,6 @@ class MovieListViewModel: ObservableObject {
             self.isLoading = false
         }
     }
-    
+
     let didChange = PassthroughSubject<MovieListViewModel, Never>()
 }

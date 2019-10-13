@@ -29,31 +29,31 @@ class APIService {
     private let apiKey = "3b426104ae068b7e3222b4d000d29bb5"
     private let baseUrl = URL(string: "https://api.themoviedb.org/3/")
     private let baseImageUrl = "https://image.tmdb.org/t/p/original"
-    
+
     func fetchImage(imageUrl: String) -> Promise<Data> {
         guard let url = URL(string: "\(baseImageUrl)\(imageUrl)") else { return Promise(error: APIError.urlError(url: imageUrl)) }
-        
+
         let request = URLRequest(url: url)
-        
+
         return firstly {
             return URLSession.shared.dataTask(.promise, with: request)
         }.compactMap { data, _ -> Data in
             return data
         }
     }
-    
+
     func fetchPopularMovies(page: Int = 1) -> Promise<MovieList> {
         guard var urlComponents = URLComponents(string: "https://api.themoviedb.org/3/movie/popular") else { return Promise<MovieList>(error: APIError.urlError(url: "/movie/popular")) }
-        
+
         urlComponents.queryItems = [
             URLQueryItem(name: "api_key", value: apiKey),
             URLQueryItem(name: "page", value: String(page))
         ]
-        
+
         guard let url = urlComponents.url else { return Promise<MovieList>(error: APIError.urlError(url: "/movie/popular"))}
-        
+
         let request = URLRequest(url: url)
-        
+
         return firstly {
             URLSession.shared.dataTask(.promise, with: request)
         }.compactMap {
