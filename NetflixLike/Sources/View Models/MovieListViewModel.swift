@@ -15,6 +15,7 @@ class MovieListViewModel: ObservableObject {
     @Published var popularMovies: [Movie] = [Movie]()
     @Published var page: Int = 1
     @Published var isLoading: Bool = false
+
     init() {
         self.isLoading = true
         _ = APIService().fetchPopuplarMovies(page: 1).done { result in
