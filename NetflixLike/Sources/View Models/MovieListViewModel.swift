@@ -13,17 +13,22 @@ import Combine
 class MovieListViewModel: ObservableObject {
     
     @Published var popularMovies: [Movie] = [Movie]()
-    @Published var page : Int = 1
+    @Published var page: Int = 1
+    @Published var isLoading: Bool = false
     init() {
-        APIService().fetchPopuplarMovies(page:  1) { result in
+        self.isLoading = true
+        _ = APIService().fetchPopuplarMovies(page: 1).done { result in
             self.popularMovies = result.data
+            self.isLoading = false
         }
     }
     
     func nextPage() {
+        self.isLoading = true
         self.page += 1
-        APIService().fetchPopuplarMovies(page: page) { result in
+        _ = APIService().fetchPopuplarMovies(page: page).done { result in
             self.popularMovies.append(contentsOf: result.data)
+            self.isLoading = false
         }
     }
     

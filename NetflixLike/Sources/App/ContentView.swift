@@ -15,12 +15,15 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             List(self.movieListViewModel.popularMovies) { item in
-                Text(item.title).onAppear {
-                    let currIndex = self.movieListViewModel.popularMovies.firstIndex { movie -> Bool in
-                        movie.title == item.title
-                    }
-                    self.getNextPageIfNecessary(encounteredIndex: currIndex ?? -1 )
+                if self.movieListViewModel.isLoading { Text("Loading...") } else {
+                    Text(item.title).onAppear {
+                                      let currIndex = self.movieListViewModel.popularMovies.firstIndex { movie -> Bool in
+                                          movie.title == item.title
+                                      }
+                                      self.getNextPageIfNecessary(encounteredIndex: currIndex ?? -1 )
+                                  }
                 }
+              
             }.navigationBarTitle(Text("Popular movies"))
         }
     }

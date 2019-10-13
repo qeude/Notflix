@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import PromiseKit
 
 enum APIError: Error, LocalizedError {
     case unknown, apiError(reason: String)
@@ -26,8 +27,7 @@ class APIService {
     private let apiKey = "3b426104ae068b7e3222b4d000d29bb5"
     private let baseUrl = URL(string: "https://api.themoviedb.org/3/")
     
-    
-    func fetchPopuplarMovies(page: Int = 1, completion: @escaping (MovieList) -> ()) {
+    func fetchPopuplarMovies(page: Int = 1) -> Promise<MovieList> {
         guard var urlComponents = URLComponents(string: "https://api.themoviedb.org/3/movie/popular") else { fatalError("Fetch popular movies URL is not correct.") }
         
         urlComponents.queryItems = [
@@ -39,17 +39,10 @@ class APIService {
         
         let request = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: request) { data, _, _ in
-            guard let data = data else { return }
-            print(data)
-            do {
-                let movies = try JSONDecoder().decode(MovieList.self, from: data)
-                DispatchQueue.main.async {
-                    completion(movies)
-                }
-            } catch {
-                print("Failed to decode : \(error)")
-            }
-        }.resume()
+        return firstly {
+            URLSession.shared.dataTask(.promise, with: request)
+        }.compactMap {
+            return try JSONDecoder().decode(MovieList.self, from: $0.data)
+        }
     }
 }
