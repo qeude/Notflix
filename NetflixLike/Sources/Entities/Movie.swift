@@ -7,14 +7,7 @@
 //
 
 import Foundation
-struct MovieList: Decodable {
-    let data: [Movie]
-
-    enum CodingKeys: String, CodingKey {
-        case data = "results"
-    }
-}
-struct Movie: Decodable, Identifiable {
+struct Movie: Decodable {
     let id: Int
     let title: String
     let overview: String?

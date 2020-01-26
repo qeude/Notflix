@@ -17,10 +17,10 @@ class ImageLoaderViewModel: ObservableObject {
 
     init(imageUrl: String) {
         self.isLoading = true
-        _ = APIService().fetchImage(imageUrl: imageUrl).done { result in
-            self.data = result
-            self.isLoading = false
-        }
+//        _ = APIService().fetchImage(imageUrl: imageUrl).done { result in
+//            self.data = result
+//            self.isLoading = false
+//        }
     }
 
     let didChange = PassthroughSubject<ImageLoaderViewModel, Never>()

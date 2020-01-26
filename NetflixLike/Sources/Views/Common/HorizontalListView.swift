@@ -16,15 +16,16 @@ struct HorizontalListView: View {
     }
 
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 8) {
-                ForEach(self.moviesList) { item in
-                    PosterImageView(imageUrl: item.posterPath!)
-                }
-            }
-            .padding(.leading, 16)
-        }
-        .frame(height: 150)
+        Text("bonjour")
+//        ScrollView(.horizontal) {
+////            HStack(spacing: 8) {
+//////                ForEach(self.moviesList) { item in
+//////                    PosterImageView(imageUrl: item.posterPath!)
+//////                }
+////            }
+//            .padding(.leading, 16)
+//        }
+//        .frame(height: 150)
     }
 }
 

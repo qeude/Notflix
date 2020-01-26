@@ -18,8 +18,14 @@ class MovieListViewModel: ObservableObject {
 
     init() {
         self.isLoading = true
-        _ = APIService().fetchPopularMovies(page: 1).done { result in
-            self.popularMovies = result.data
+        _ = APIClient().send(GetPopularMovies()) { response in
+            switch response {
+            case .success(let movies): break
+//                self.popularMovies = movies
+            case .failure(let error):
+                self.popularMovies = []
+                print("error : \(error)")
+            }
             self.isLoading = false
         }
     }
@@ -27,10 +33,10 @@ class MovieListViewModel: ObservableObject {
     func nextPage() {
         self.isLoading = true
         self.page += 1
-        _ = APIService().fetchPopularMovies(page: page).done { result in
-            self.popularMovies.append(contentsOf: result.data)
-            self.isLoading = false
-        }
+//        _ = APIService().fetchPopularMovies(page: page).done { result in
+//            self.popularMovies.append(contentsOf: result.data)
+//            self.isLoading = false
+//        }
     }
 
     let didChange = PassthroughSubject<MovieListViewModel, Never>()
