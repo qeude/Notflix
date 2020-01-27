@@ -11,10 +11,17 @@ import Foundation
 typealias ResultCallback<Value> = (Result<Value, Error>) -> Void
 
 public class APIClient {
-    private let publicKey = "3b426104ae068b7e3222b4d000d29bb5"
-    private let baseUrl = URL(string: "https://api.themoviedb.org/3/")
-    private let session = URLSession(configuration: .default)
+    private let publicKey: String
+    private let baseUrl: URL?
+    private let session: URLSession
 
+    init(publicKey: String = "3b426104ae068b7e3222b4d000d29bb5",
+         baseUrl: URL? = URL(string: "https://api.themoviedb.org/3/"),
+         session: URLSession = .shared) {
+        self.publicKey = publicKey
+        self.baseUrl = baseUrl
+        self.session = session
+    }
     func send<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<T.Response>) {
         guard let endpoint = self.endpoint(for: request) else {
             completion(.failure(APIError.invalidUrl))
