@@ -7,20 +7,34 @@
 //
 
 import XCTest
+import Combine
 
 @testable import NetflixLike
-class MoviesAPIService: XCTestCase {
 
+class MoviesAPIService: XCTestCase {
     func testFetchPoupularMovies() {
-        XCTAssertNoThrow(
-            APIClient().send(GetPopularMovies(), completion: { response in
-                switch response {
-                case .success(let movies):
-                    XCTAssertGreaterThan(movies.count, 0)
-                case .failure(let error):
-                    XCTFail("Failed with error : \(error)")
-                }
-            })
-        )
+        let publisher = APIClient().send(GetPopularMovies())
+
+        XCTAssertNotNil(publisher)
+
+        let expectationFinished = XCTestExpectation(description: "finished")
+        let expectationReceive = XCTestExpectation(description: "receiveValue")
+        let expectationFailure = XCTestExpectation(description: "failure")
+        expectationFailure.isInverted = true
+
+        let cancellable = publisher.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure:
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            XCTAssertGreaterThan(response.count, 0)
+            expectationReceive.fulfill()
+        })
+
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: 5.0)
     }
 }

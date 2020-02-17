@@ -7,13 +7,16 @@
 //
 
 import Foundation
+import Combine
 
 typealias ResultCallback<Value> = (Result<Value, Error>) -> Void
+typealias CombineResultCallback<Value> = AnyPublisher<Value, Error>
 
 public class APIClient {
     private let publicKey: String
     private let baseUrl: URL?
     private let session: URLSession
+    private var cancellable: AnyCancellable?
 
     init(publicKey: String = "3b426104ae068b7e3222b4d000d29bb5",
          baseUrl: URL? = URL(string: "https://api.themoviedb.org/3/"),
@@ -22,30 +25,28 @@ public class APIClient {
         self.baseUrl = baseUrl
         self.session = session
     }
-    func send<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<T.Response>) {
+
+    func send<T: APIRequest>(_ request: T) -> CombineResultCallback<T.Response> {
         guard let endpoint = self.endpoint(for: request) else {
-            completion(.failure(APIError.invalidUrl))
-            return
+            fatalError("should have an URL here")
         }
 
-        let task = session.dataTask(with: URLRequest(url: endpoint)) { data, _, error in
-            if let data = data {
-                do {
-                    let apiResponse = try JSONDecoder().decode(APIResponse<T.Response>.self, from: data)
+        return session
+            .dataTaskPublisher(for: URLRequest(url: endpoint))
+            .tryMap { try self.validate($0.data, $0.response) }
+            .decode(type: APIResponse<T.Response>.self, decoder: JSONDecoder())
+            .tryCompactMap { $0.results }
+            .eraseToAnyPublisher()
+    }
 
-                    if let dataResponse = apiResponse.results {
-                        completion(.success(dataResponse))
-                    } else {
-                        completion(.failure(APIError.decoding))
-                    }
-                } catch {
-                    completion(.failure(error))
-                }
-            } else if let error = error {
-                completion(.failure(error))
-            }
+    private func validate(_ data: Data, _ response: URLResponse) throws -> Data {
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw APIError.invalidResponse
         }
-        task.resume()
+        guard (200..<300).contains(httpResponse.statusCode) else {
+            throw APIError.statusCode
+        }
+        return data
     }
 
     private func endpoint<T: APIRequest>(for request: T) -> URL? {

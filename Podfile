@@ -7,7 +7,8 @@ target 'NetflixLike' do
 
   # Pods for NetflixLike
   pod "PromiseKit", "~> 6.8"
-
+  pod 'CocoaLumberjack/Swift'
+  
   target 'NetflixLikeTests' do
     inherit! :search_paths
     # Pods for testing

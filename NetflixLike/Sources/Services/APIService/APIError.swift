@@ -13,6 +13,8 @@ enum APIError: LocalizedError {
     case decoding
     case server(message: String)
     case invalidUrl
+    case statusCode
+    case invalidResponse
 
     var localizedDescription: String {
         switch self {
@@ -20,6 +22,8 @@ enum APIError: LocalizedError {
         case .decoding: return "APIError while decoding"
         case .server(let message): return "APIError due to the server with message: \(message)"
         case .invalidUrl: return "APIError invalidUrl"
+        case .statusCode: return "APIError status code error"
+        case .invalidResponse: return "APIError invalid response"
         }
     }
 }

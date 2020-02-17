@@ -9,8 +9,11 @@
 import Foundation
 import SwiftUI
 import Combine
+import CocoaLumberjack
 
 class MovieListViewModel: ObservableObject {
+
+    var cancellable: AnyCancellable?
 
     @Published var popularMovies: [Movie] = [Movie]()
     @Published var page: Int = 1
@@ -18,16 +21,15 @@ class MovieListViewModel: ObservableObject {
 
     init() {
         self.isLoading = true
-        _ = APIClient().send(GetPopularMovies()) { response in
-            switch response {
-            case .success(let movies): break
-//                self.popularMovies = movies
-            case .failure(let error):
-                self.popularMovies = []
-                print("error : \(error)")
+        //FIXME: Fix this to be handled with Combine
+        cancellable = APIClient().send(GetPopularMovies()).sink(receiveCompletion: {  error in
+            DDLogError("error while fetching popular movies : \(error)")
+        }, receiveValue: { movies in
+//            self.popularMovies = movies
+            movies.forEach { movie in
+                DDLogDebug("Movie : \(movie.title)")
             }
-            self.isLoading = false
-        }
+        })
     }
 
     func nextPage() {
