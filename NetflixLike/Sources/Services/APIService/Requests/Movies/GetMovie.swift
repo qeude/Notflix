@@ -9,7 +9,7 @@
 import Foundation
 
 struct GetMovie: APIRequest {
-    typealias Response = APIResponse<Movie>
+    typealias Response = Movie
 
     var resourceName: String {
         return "movie/\(movieId)"
