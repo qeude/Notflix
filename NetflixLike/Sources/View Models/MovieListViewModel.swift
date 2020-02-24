@@ -25,10 +25,12 @@ class MovieListViewModel: ObservableObject {
         cancellable = APIClient().send(GetPopularMovies()).sink(receiveCompletion: {  error in
             DDLogError("error while fetching popular movies : \(error)")
         }, receiveValue: { movies in
-//            self.popularMovies = movies
-            movies.forEach { movie in
+            movies.results.forEach { movie in
                 DDLogDebug("Movie : \(movie.title)")
-            }
+            }//            self.popularMovies = movies
+//            movies.forEach { movie in
+//                DDLogDebug("Movie : \(movie.title)")
+//            }
         })
     }
 

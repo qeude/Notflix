@@ -13,9 +13,9 @@ import CocoaLumberjack
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if let ddtyLogger = DDTTYLogger.sharedInstance {
-            DDLog.add(ddtyLogger)
-        }
+//        if let ddtyLogger = DDTTYLogger.sharedInstance {
+//            DDLog.add(ddtyLogger)
+//        }
 
         DDLog.add(DDOSLogger.sharedInstance) // ASL = Apple System Logs
 

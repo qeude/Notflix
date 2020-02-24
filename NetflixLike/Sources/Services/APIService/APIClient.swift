@@ -9,7 +9,6 @@
 import Foundation
 import Combine
 
-typealias ResultCallback<Value> = (Result<Value, Error>) -> Void
 typealias CombineResultCallback<Value> = AnyPublisher<Value, Error>
 
 public class APIClient {
@@ -34,8 +33,7 @@ public class APIClient {
         return session
             .dataTaskPublisher(for: URLRequest(url: endpoint))
             .tryMap { try self.validate($0.data, $0.response) }
-            .decode(type: APIResponse<T.Response>.self, decoder: JSONDecoder())
-            .tryCompactMap { $0.results }
+            .decode(type: T.Response.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
 

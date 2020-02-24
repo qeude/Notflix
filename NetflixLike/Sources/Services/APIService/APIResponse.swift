@@ -8,11 +8,13 @@
 
 import Foundation
 
-struct APIResponse<Results: Decodable>: Decodable {
-    let page: Int?
-    let totalResults: Int?
-    let totalPages: Int?
-    let results: Results?
+struct APIResponse<ResultType: Decodable>: Decodable {}
+
+struct APIResponseList<ResultType: Decodable>: Decodable {
+    let page: Int
+    let totalResults: Int
+    let totalPages: Int
+    let results: [ResultType]
 
     enum CodingKeys: String, CodingKey {
         case page

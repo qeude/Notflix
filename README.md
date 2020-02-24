@@ -3,7 +3,7 @@
 [![Xcode](https://img.shields.io/badge/Xcode-11.0-brightgreen.svg)](https://developer.apple.com/download/more/)
 
 ## 📖 Description
-📱 Netflix clone iOS app using Swift. App mainly developped to learn about SwiftUI and Combine
+📱 Netflix clone iOS app using Swift. App mainly developed to learn about SwiftUI and Combine
 
 ## 💻 Developers
 * Quentin Eude
