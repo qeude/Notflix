@@ -1,8 +1,8 @@
 //
-//  MoviesAPIService.swift
+//  TVShowsAPIServiceTests.swift
 //  NetflixLikeTests
 //
-//  Created by Quentin Eude on 26/01/2020.
+//  Created by Quentin Eude on 02/03/2020.
 //  Copyright © 2020 Quentin Eude. All rights reserved.
 //
 
@@ -11,9 +11,9 @@ import Combine
 
 @testable import NetflixLike
 
-class MoviesAPIService: NetflixLikeTests {
-    func testFetchPopularMovies() {
-        let publisher = APIClient().send(GetPopularMovies())
+class TVShowsAPIServiceTests: NetflixLikeTests {
+    func testFetchPopularTVShows() {
+        let publisher = APIClient().send(GetPopularTVShows())
 
         XCTAssertNotNil(publisher)
 
@@ -34,71 +34,14 @@ class MoviesAPIService: NetflixLikeTests {
             XCTAssertGreaterThan(response.results.count, 0)
             expectationReceive.fulfill()
         })
+        // Disable never used warning
+        _ = cancellable
 
         wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
     }
 
-    func testFetchTopRatedMovies() {
-        let publisher = APIClient().send(GetTopRatedMovies())
-
-        XCTAssertNotNil(publisher)
-
-        let expectationFinished = XCTestExpectation(description: "finished")
-        let expectationReceive = XCTestExpectation(description: "receiveValue")
-        let expectationFailure = XCTestExpectation(description: "failure")
-        expectationFailure.isInverted = true
-
-        let cancellable = publisher.sink (receiveCompletion: { (completion) in
-           switch completion {
-           case .failure:
-               expectationFailure.fulfill()
-           case .finished:
-               expectationFinished.fulfill()
-           }
-        }, receiveValue: { response in
-           XCTAssertNotNil(response)
-            XCTAssertGreaterThan(response.results.count, 0)
-           expectationReceive.fulfill()
-        })
-
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
-    }
-
-    func testGetMovie() {
-        let movie = anyMovie()
-        var newMovie: Movie?
-
-        let publisher = APIClient().send(GetMovie(movieId: 19404))
-
-        XCTAssertNotNil(publisher)
-
-        let expectationFinished = XCTestExpectation(description: "finished")
-        let expectationReceive = XCTestExpectation(description: "receiveValue")
-        let expectationFailure = XCTestExpectation(description: "failure")
-        expectationFailure.isInverted = true
-
-        let cancellable = publisher.sink (receiveCompletion: { (completion) in
-            switch completion {
-            case .failure:
-                expectationFailure.fulfill()
-            case .finished:
-                expectationFinished.fulfill()
-            }
-        }, receiveValue: { response in
-            XCTAssertNotNil(response)
-            newMovie = response
-            expectationReceive.fulfill()
-        })
-
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
-        XCTAssertNotNil(newMovie)
-        XCTAssertEqual(movie.title, newMovie?.title)
-    }
-
-    func testFetchRecommendationsMovies() {
-        let movie = anyMovie()
-
-        let publisher = APIClient().send(GetRecommendationsMovies(movieId: movie.id))
+    func testFetchTopRatedTVShows() {
+        let publisher = APIClient().send(GetTopRatedTVShows())
 
         XCTAssertNotNil(publisher)
 
@@ -119,6 +62,70 @@ class MoviesAPIService: NetflixLikeTests {
             XCTAssertGreaterThan(response.results.count, 0)
             expectationReceive.fulfill()
         })
+        // Disable never used warning
+        _ = cancellable
+
+        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+    }
+
+    func testGetTVShow() {
+        var tvShow: TVShow?
+
+        let publisher = APIClient().send(GetTVShow(tvShowId: 1402))
+
+        XCTAssertNotNil(publisher)
+
+        let expectationFinished = XCTestExpectation(description: "finished")
+        let expectationReceive = XCTestExpectation(description: "receiveValue")
+        let expectationFailure = XCTestExpectation(description: "failure")
+        expectationFailure.isInverted = true
+
+        let cancellable = publisher.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure:
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            tvShow = response
+            expectationReceive.fulfill()
+        })
+        // Disable never used warning
+        _ = cancellable
+
+        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        XCTAssertNotNil(tvShow)
+        XCTAssertEqual(tvShow?.title, "The Walking Dead")
+    }
+
+    func testFetchRecommendationsTVShows() {
+        let tvShow = anyTVShow()
+
+        let publisher = APIClient().send(GetRecommendationsTVShows(tvShowId: tvShow.id))
+
+        XCTAssertNotNil(publisher)
+
+        let expectationFinished = XCTestExpectation(description: "finished")
+        let expectationReceive = XCTestExpectation(description: "receiveValue")
+        let expectationFailure = XCTestExpectation(description: "failure")
+        expectationFailure.isInverted = true
+
+        let cancellable = publisher.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure:
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            XCTAssertGreaterThan(response.results.count, 0)
+            expectationReceive.fulfill()
+        })
+        // Disable never used warning
+        _ = cancellable
 
         wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
     }

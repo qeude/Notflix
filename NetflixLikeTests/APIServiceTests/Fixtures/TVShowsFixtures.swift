@@ -1,8 +1,8 @@
 //
-//  MoviesFixtures.swift
+//  TVShowsFixtures.swift
 //  NetflixLikeTests
 //
-//  Created by Quentin Eude on 18/02/2020.
+//  Created by Quentin Eude on 02/03/2020.
 //  Copyright © 2020 Quentin Eude. All rights reserved.
 //
 
@@ -11,10 +11,10 @@ import XCTest
 
 @testable import NetflixLike
 extension NetflixLikeTests {
-    func anyMovie() -> Movie {
-        var movies: [Movie] = []
+    func anyTVShow() -> TVShow {
+        var tvShow: [TVShow] = []
 
-        let publisher = APIClient().send(GetTopRatedMovies())
+        let publisher = APIClient().send(GetTopRatedTVShows())
 
         XCTAssertNotNil(publisher)
 
@@ -33,7 +33,7 @@ extension NetflixLikeTests {
         }, receiveValue: { response in
             XCTAssertNotNil(response)
             XCTAssertGreaterThan(response.results.count, 0)
-            movies = response.results
+            tvShow = response.results
             expectationReceive.fulfill()
         })
         // Disable never used warning
@@ -41,6 +41,6 @@ extension NetflixLikeTests {
 
         wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
 
-        return movies.first!
+        return tvShow.first!
     }
 }
