@@ -8,6 +8,30 @@
 
 import SwiftUI
 
+//struct ContentView: View {
+//    let url = URL(string: "https://image.tmdb.org/t/p/original/pThyQovXQrw2m0s9x82twj48Jq4.jpg")!
+//    let cache = TemporaryImageCache()
+//    @State var numberOfRows = 0
+//
+//    var body: some View {
+//        NavigationView {
+//            list.navigationBarItems(trailing: addButton)
+//        }
+//    }
+//
+//    private var list: some View {
+//        List(0..<numberOfRows, id: \.self) { _ in
+//            AsyncImage(url: self.url, placeholder: Text("Loading ..."), cache: self.cache)
+//                .frame(minHeight: 200, maxHeight: 200)
+//                .aspectRatio(2 / 3, contentMode: .fit)
+//        }
+//    }
+//
+//    private var addButton: some View {
+//        Button(action: { self.numberOfRows += 1 }) { Image(systemName: "plus") }
+//    }
+//}
+
 struct HorizontalListView: View {
     let moviesList: [Movie]!
 

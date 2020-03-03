@@ -10,7 +10,8 @@ import SwiftUI
 
 struct TVShowsView: View {
     var body: some View {
-        Text("TVShowsView").foregroundColor(.white)
+//        Text("TVShowsView").foregroundColor(.white)
+        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg")!)
     }
 }
 
