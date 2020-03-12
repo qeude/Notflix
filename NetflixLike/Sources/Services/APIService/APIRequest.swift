@@ -8,8 +8,9 @@
 
 import Foundation
 
-protocol APIRequest: Encodable {
-    associatedtype Response: Decodable
-
-    var resourceName: String { get }
+class APIRequest<E: Decodable>: Encodable {
+    let path: String
+    init(path: String) {
+        self.path = path
+    }
 }

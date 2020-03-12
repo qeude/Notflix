@@ -8,8 +8,6 @@
 
 import Foundation
 
-struct APIResponse<ResultType: Decodable>: Decodable {}
-
 struct APIResponseList<ResultType: Decodable>: Decodable {
     let page: Int
     let totalResults: Int

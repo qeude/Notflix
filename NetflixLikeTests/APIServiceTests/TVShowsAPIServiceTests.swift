@@ -13,7 +13,7 @@ import Combine
 
 class TVShowsAPIServiceTests: NetflixLikeTests {
     func testFetchPopularTVShows() {
-        let publisher = APIClient().send(GetPopularTVShows())
+        let publisher = APIClient().send(APIEndpoints.popularTVShows)
 
         XCTAssertNotNil(publisher)
 
@@ -41,7 +41,7 @@ class TVShowsAPIServiceTests: NetflixLikeTests {
     }
 
     func testFetchTopRatedTVShows() {
-        let publisher = APIClient().send(GetTopRatedTVShows())
+        let publisher = APIClient().send(APIEndpoints.topRatedTVShows)
 
         XCTAssertNotNil(publisher)
 
@@ -71,7 +71,7 @@ class TVShowsAPIServiceTests: NetflixLikeTests {
     func testGetTVShow() {
         var tvShow: TVShow?
 
-        let publisher = APIClient().send(GetTVShow(tvShowId: 1402))
+        let publisher = APIClient().send(APIEndpoints.tvShow(tvShowId: 1402))
 
         XCTAssertNotNil(publisher)
 
@@ -103,7 +103,7 @@ class TVShowsAPIServiceTests: NetflixLikeTests {
     func testFetchRecommendationsTVShows() {
         let tvShow = anyTVShow()
 
-        let publisher = APIClient().send(GetRecommendationsTVShows(tvShowId: tvShow.id))
+        let publisher = APIClient().send(APIEndpoints.recommendationsTVShows(tvShowId: tvShow.id))
 
         XCTAssertNotNil(publisher)
 

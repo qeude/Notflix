@@ -14,7 +14,7 @@ extension NetflixLikeTests {
     func anyTVShow() -> TVShow {
         var tvShow: [TVShow] = []
 
-        let publisher = APIClient().send(GetTopRatedTVShows())
+        let publisher = APIClient().send(APIEndpoints.topRatedTVShows)
 
         XCTAssertNotNil(publisher)
 

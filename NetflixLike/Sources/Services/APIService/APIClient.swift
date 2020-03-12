@@ -9,23 +9,20 @@
 import Foundation
 import Combine
 
-typealias CombineResultCallback<Value> = AnyPublisher<Value, Error>
-
 public class APIClient {
     private let publicKey: String
-    private let baseUrl: URL?
+    private static let baseUrl: URL? = URL(string: "https://api.themoviedb.org/3/")
+    static let baseImageStringUrl: String = "https://image.tmdb.org/t/p/w500"
     private let session: URLSession
     private var cancellable: AnyCancellable?
 
     init(publicKey: String = "3b426104ae068b7e3222b4d000d29bb5",
-         baseUrl: URL? = URL(string: "https://api.themoviedb.org/3/"),
          session: URLSession = .shared) {
         self.publicKey = publicKey
-        self.baseUrl = baseUrl
         self.session = session
     }
 
-    func send<T: APIRequest>(_ request: T) -> CombineResultCallback<T.Response> {
+    func send<X>(_ request: APIRequest<X>) -> AnyPublisher<X, Error> {
         guard let endpoint = self.endpoint(for: request) else {
             fatalError("should have an URL here")
         }
@@ -33,7 +30,8 @@ public class APIClient {
         return session
             .dataTaskPublisher(for: URLRequest(url: endpoint))
             .tryMap { try self.validate($0.data, $0.response) }
-            .decode(type: T.Response.self, decoder: JSONDecoder())
+            .decode(type: X.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
@@ -47,9 +45,9 @@ public class APIClient {
         return data
     }
 
-    private func endpoint<T: APIRequest>(for request: T) -> URL? {
-        guard let baseUrl = URL(string: request.resourceName, relativeTo: baseUrl) else {
-            fatalError("Bad resourceName: \(request.resourceName)")
+    private func endpoint<X>(for request: APIRequest<X>) -> URL? {
+        guard let baseUrl = URL(string: request.path, relativeTo: APIClient.baseUrl) else {
+            fatalError("Bad resourceName: \(request.path)")
         }
 
         var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: true)!

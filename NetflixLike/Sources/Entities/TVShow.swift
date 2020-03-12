@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct TVShow: Decodable {
+struct TVShow: Decodable, Identifiable {
     let id: Int
     let title: String
     let overview: String?
@@ -18,6 +18,21 @@ struct TVShow: Decodable {
     let posterPath: String?
     let backdropPath: String?
     let firstAirDate: String?
+
+    var posterUrl: URL? {
+        guard let posterPath = posterPath else {
+            return nil
+        }
+        let url = URL(string: "\(APIClient.baseImageStringUrl)\(posterPath)")
+        return url
+    }
+
+    var backdropUrl: URL? {
+        guard let backdropPath = backdropPath else {
+            return nil
+        }
+        return URL(string: "\(APIClient.baseImageStringUrl)\(backdropPath)")
+    }
 
     enum CodingKeys: String, CodingKey {
         case id

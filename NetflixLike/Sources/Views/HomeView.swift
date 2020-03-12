@@ -39,7 +39,7 @@ struct HomeView: View {
 
     func containedView() -> AnyView {
         switch selectedType {
-        case .tvShows: return AnyView(TVShowsView())
+        case .tvShows: return AnyView(TVShowsView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.popularTVShows), listName: "Popular TV Shows"))
         case .movies: return AnyView(MoviesView())
         }
     }

@@ -13,7 +13,7 @@ import Combine
 
 class MoviesAPIServiceTests: NetflixLikeTests {
     func testFetchPopularMovies() {
-        let publisher = APIClient().send(GetPopularMovies())
+        let publisher = APIClient().send(APIEndpoints.popularMovies)
 
         XCTAssertNotNil(publisher)
 
@@ -41,7 +41,7 @@ class MoviesAPIServiceTests: NetflixLikeTests {
     }
 
     func testFetchTopRatedMovies() {
-        let publisher = APIClient().send(GetTopRatedMovies())
+        let publisher = APIClient().send(APIEndpoints.topRatedMovies)
 
         XCTAssertNotNil(publisher)
 
@@ -64,14 +64,14 @@ class MoviesAPIServiceTests: NetflixLikeTests {
         })
         // Disable never used warning
         _ = cancellable
-        
+
         wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
     }
 
     func testGetMovie() {
         var movie: Movie?
 
-        let publisher = APIClient().send(GetMovie(movieId: 424))
+        let publisher = APIClient().send(APIEndpoints.movie(movieId: 424))
 
         XCTAssertNotNil(publisher)
 
@@ -103,7 +103,7 @@ class MoviesAPIServiceTests: NetflixLikeTests {
     func testFetchRecommendationsMovies() {
         let movie = anyMovie()
 
-        let publisher = APIClient().send(GetRecommendationsMovies(movieId: movie.id))
+        let publisher = APIClient().send(APIEndpoints.recommendationsMovies(movieId: movie.id))
 
         XCTAssertNotNil(publisher)
 
