@@ -17,29 +17,28 @@ struct HomeView: View {
     @State public var selectedType: SelectedType = .tvShows
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color(.black).edgesIgnoringSafeArea(.all)
-                containedView()
-            }.navigationBarItems(leading: HStack {
-                Button("TV Shows") {
-                    self.selectedType = .tvShows
-                }
-                .accentColor(selectedType == .tvShows ? .red : .white)
-                .padding()
-
-                Button("Movies") {
-                    self.selectedType = .movies
-                }
-                .accentColor(selectedType == .movies ? .red : .white)
-                .padding()
-            })
-        }
+            NavigationView {
+                ZStack {
+                    Color(.black).edgesIgnoringSafeArea(.all)
+                    self.containedView()
+                }.navigationBarItems(leading: HStack {
+                    Button("TV Shows") {
+                        self.selectedType = .tvShows
+                    }
+                    .accentColor(self.selectedType == .tvShows ? .red : .white)
+                    .padding()
+                    Button("Movies") {
+                        self.selectedType = .movies
+                    }
+                    .accentColor(self.selectedType == .movies ? .red : .white)
+                    .padding()
+                })
+            }
     }
 
     func containedView() -> AnyView {
         switch selectedType {
-        case .tvShows: return AnyView(TVShowsView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.popularTVShows), listName: "Popular TV Shows"))
+        case .tvShows: return AnyView(TVShowsView())
         case .movies: return AnyView(MoviesView())
         }
     }
