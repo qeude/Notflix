@@ -13,9 +13,9 @@ struct AsyncImage: View {
     @State var shouldAnimate = true
     private let configuration: (Image) -> Image
 
-    init(url: URL, cache: ImageCache? = nil, configuration: @escaping (Image) -> Image = { $0 }) {
+    init(url: URL, configuration: @escaping (Image) -> Image = { $0 }) {
         self.configuration = configuration
-        loader = ImageLoaderViewModel(url: url, cache: cache)
+        loader = ImageLoaderViewModel(url: url)
     }
     var body: some View {
         image

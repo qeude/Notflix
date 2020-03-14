@@ -9,40 +9,45 @@
 import Foundation
 import SwiftUI
 import Combine
+import CocoaLumberjack
 
-protocol ImageCache {
-    subscript(_ url: URL) -> UIImage? { get set }
+class ImageCache {
+    var cache = NSCache<NSString, UIImage>()
+
+    func get(forKey: String) -> UIImage? {
+        return cache.object(forKey: NSString(string: forKey))
+    }
+
+    func set(forKey: String, image: UIImage) {
+        cache.setObject(image, forKey: NSString(string: forKey))
+    }
 }
 
-struct TemporaryImageCache: ImageCache {
-    private let cache = NSCache<NSURL, UIImage>()
-
-    subscript(_ key: URL) -> UIImage? {
-        get { cache.object(forKey: key as NSURL) }
-        set { newValue == nil ? cache.removeObject(forKey: key as NSURL) : cache.setObject(newValue!, forKey: key as NSURL) }
+extension ImageCache {
+    private static var imageCache = ImageCache()
+    static func getImageCache() -> ImageCache {
+        return imageCache
     }
 }
 
 class ImageLoaderViewModel: ObservableObject {
     @Published var image: UIImage?
 
-    private var cache: ImageCache?
+    private var cache = ImageCache.getImageCache()
     private var cancellable: AnyCancellable?
     private(set) var isLoading = false
     private static let imageProcessingQueue = DispatchQueue(label: "image-processing")
 
     private let url: URL
 
-    init(url: URL, cache: ImageCache? = nil) {
+    init(url: URL) {
         self.url = url
-        self.cache = cache
     }
 
     func load() {
         guard !isLoading else {return}
 
-        if let image = cache?[url] {
-            self.image = image
+        if loadImageFromCache() {
             return
         }
 
@@ -58,6 +63,17 @@ class ImageLoaderViewModel: ObservableObject {
             .assign(to: \.image, on: self)
     }
 
+    func loadImageFromCache() -> Bool {
+        guard let cacheImage = cache.get(forKey: url.absoluteString) else {
+            DDLogDebug("not found in cache")
+            return false
+        }
+
+        DDLogDebug("Hit from cache")
+        image = cacheImage
+        return true
+    }
+
     private func onStart() {
         isLoading = true
     }
@@ -67,7 +83,10 @@ class ImageLoaderViewModel: ObservableObject {
     }
 
     private func cache(_ image: UIImage?) {
-        image.map { cache?[url] = $0 }
+        guard let image = image else {
+            return
+        }
+        self.cache.set(forKey: self.url.absoluteString, image: image)
     }
 
     func cancel() {

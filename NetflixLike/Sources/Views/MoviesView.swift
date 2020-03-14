@@ -10,12 +10,22 @@ import SwiftUI
 
 struct MoviesView: View {
     var body: some View {
-        Text("MoviesView").foregroundColor(.white)
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 25) {
+                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: "Popular Movies")
+                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: "Top Rated Movies")
+                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: "Popular Movies")
+                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: "Top Rated Movies")
+            }
+        }
     }
 }
 
 struct MoviesView_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesView()
+       ZStack {
+            Color(.black).edgesIgnoringSafeArea(.all)
+            MoviesView()
+        }
     }
 }
