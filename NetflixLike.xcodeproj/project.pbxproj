@@ -374,11 +374,11 @@
 			buildConfigurationList = 01553B5C234BCA560018CDF3 /* Build configuration list for PBXNativeTarget "NetflixLike" */;
 			buildPhases = (
 				A78D4288AB4B3589C52D235C /* [CP] Check Pods Manifest.lock */,
+				019284D42353C64300CDC83B /* Run Script */,
 				01553B39234BCA550018CDF3 /* Sources */,
 				01553B3A234BCA550018CDF3 /* Frameworks */,
 				01553B3B234BCA550018CDF3 /* Resources */,
 				9C7B66DEC732B77089AC4241 /* [CP] Embed Pods Frameworks */,
-				019284D42353C64300CDC83B /* Run Script */,
 				01433EAB23FB2E290003FA6E /* Embed Frameworks */,
 			);
 			buildRules = (
