@@ -485,7 +485,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen\n";
+			shellScript = "Pods/SwiftGen/bin/swiftgen\n";
 		};
 		019284D42353C64300CDC83B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
