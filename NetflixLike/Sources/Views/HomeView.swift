@@ -22,12 +22,12 @@ struct HomeView: View {
                     Color(.black).edgesIgnoringSafeArea(.all)
                     self.containedView()
                 }.navigationBarItems(leading: HStack {
-                    Button("TV Shows") {
+                    Button(L10n.Home.Tab.tvshows) {
                         self.selectedType = .tvShows
                     }
                     .accentColor(self.selectedType == .tvShows ? .red : .white)
                     .padding()
-                    Button("Movies") {
+                    Button(L10n.Home.Tab.movies) {
                         self.selectedType = .movies
                     }
                     .accentColor(self.selectedType == .movies ? .red : .white)

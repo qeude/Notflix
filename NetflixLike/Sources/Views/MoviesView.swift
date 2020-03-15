@@ -12,10 +12,10 @@ struct MoviesView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 25) {
-                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: "Popular Movies")
-                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: "Top Rated Movies")
-                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: "Popular Movies")
-                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: "Top Rated Movies")
+                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: L10n.Movies.Popular.title)
+                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: L10n.Movies.Toprated.title)
+                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: L10n.Movies.Popular.title)
+                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: L10n.Movies.Toprated.title)
             }
         }
     }

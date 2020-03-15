@@ -13,7 +13,7 @@ struct SearchView: View {
         ZStack {
             Color(.black)
                 .edgesIgnoringSafeArea(.all)
-            Text("Search tab")
+            Text(L10n.Tab.search)
                 .foregroundColor(.white)
         }
     }

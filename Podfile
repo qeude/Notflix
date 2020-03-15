@@ -6,8 +6,8 @@ target 'NetflixLike' do
   use_frameworks!
 
   # Pods for NetflixLike
-  pod "PromiseKit", "~> 6.8"
-  pod 'CocoaLumberjack/Swift'
+  pod 'SwiftGen', '~> 6.0'
+  pod 'CocoaLumberjack/Swift', '~> 3.6'
   
   target 'NetflixLikeTests' do
     inherit! :search_paths

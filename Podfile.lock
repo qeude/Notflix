@@ -2,29 +2,21 @@ PODS:
   - CocoaLumberjack/Core (3.6.1)
   - CocoaLumberjack/Swift (3.6.1):
     - CocoaLumberjack/Core
-  - PromiseKit (6.11.0):
-    - PromiseKit/CorePromise (= 6.11.0)
-    - PromiseKit/Foundation (= 6.11.0)
-    - PromiseKit/UIKit (= 6.11.0)
-  - PromiseKit/CorePromise (6.11.0)
-  - PromiseKit/Foundation (6.11.0):
-    - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.11.0):
-    - PromiseKit/CorePromise
+  - SwiftGen (6.1.0)
 
 DEPENDENCIES:
-  - CocoaLumberjack/Swift
-  - PromiseKit (~> 6.8)
+  - CocoaLumberjack/Swift (~> 3.6)
+  - SwiftGen (~> 6.0)
 
 SPEC REPOS:
   trunk:
     - CocoaLumberjack
-    - PromiseKit
+    - SwiftGen
 
 SPEC CHECKSUMS:
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
-  PromiseKit: e4863d06976e7dee5e41c04fc7371c16b3600292
+  SwiftGen: f872ca75cbd17bf7103c17f13dcfa0d9a15667b0
 
-PODFILE CHECKSUM: 0d754ccc59c5cdaea95a6b0beb3a98807a72d980
+PODFILE CHECKSUM: fae9976b633c3be5ce8bfb9e837ae0a57d4a7460
 
 COCOAPODS: 1.8.3

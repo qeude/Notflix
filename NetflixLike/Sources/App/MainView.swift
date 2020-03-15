@@ -24,7 +24,7 @@ struct MainView: View {
             }
             .tabItem {
                 Image(systemName: "house")
-                Text("Home")
+                Text(L10n.Tab.home)
             }.tag(0)
             ZStack {
                 Color(.black).edgesIgnoringSafeArea(.all)
@@ -32,7 +32,7 @@ struct MainView: View {
             }
             .tabItem {
                 Image(systemName: "magnifyingglass")
-                Text("Search")
+                Text(L10n.Tab.search)
             }.tag(1)
         }
         .accentColor(.red)
