@@ -374,11 +374,12 @@
 			buildConfigurationList = 01553B5C234BCA560018CDF3 /* Build configuration list for PBXNativeTarget "NetflixLike" */;
 			buildPhases = (
 				A78D4288AB4B3589C52D235C /* [CP] Check Pods Manifest.lock */,
-				019284D42353C64300CDC83B /* Run Script */,
+				01052515241ED48A00BD35A7 /* SwiftGen */,
 				01553B39234BCA550018CDF3 /* Sources */,
 				01553B3A234BCA550018CDF3 /* Frameworks */,
 				01553B3B234BCA550018CDF3 /* Resources */,
 				9C7B66DEC732B77089AC4241 /* [CP] Embed Pods Frameworks */,
+				019284D42353C64300CDC83B /* SwiftLint */,
 				01433EAB23FB2E290003FA6E /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -468,7 +469,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		019284D42353C64300CDC83B /* Run Script */ = {
+		01052515241ED48A00BD35A7 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -477,14 +478,32 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = SwiftGen;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen\n";
+		};
+		019284D42353C64300CDC83B /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		8C4B9D76FC73DB5312302A7A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -12,10 +12,14 @@ struct TVShowsView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 25) {
-                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.popularTVShows), listName: L10n.Tvshows.Popular.title)
-                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.topRatedTVShows), listName: L10n.Tvshows.Toprated.title)
-                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.popularTVShows), listName: L10n.Tvshows.Popular.title)
-                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.topRatedTVShows), listName: L10n.Tvshows.Toprated.title)
+                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.popularTVShows),
+                                          listName: L10n.Tvshows.Popular.title)
+                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.topRatedTVShows),
+                                          listName: L10n.Tvshows.Toprated.title)
+                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.popularTVShows),
+                                          listName: L10n.Tvshows.Popular.title)
+                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.topRatedTVShows),
+                                          listName: L10n.Tvshows.Toprated.title)
             }
         }
     }
