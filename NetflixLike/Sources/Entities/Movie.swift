@@ -36,7 +36,6 @@ struct Movie: Decodable, Identifiable {
            return URL(string: "\(APIClient.baseImageStringUrl)\(backdropPath)")
        }
 
-    
     enum CodingKeys: String, CodingKey {
         case id
         case title

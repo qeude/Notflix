@@ -28,10 +28,7 @@ struct HorizontalTVShowsListView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(tvShowsViewModel.tvShows) { tvShow in
-                        // TODO: Change that to display a default image when needed
-                        AsyncImage(url: tvShow.posterUrl!, configuration: {$0.resizable()})
-                            .frame(width: 110, height: 180)
-                            .cornerRadius(8.0)
+                        TVShowCell(for: tvShow)
                     }
                 }
                 .frame(height: 190)

@@ -27,10 +27,7 @@ struct HorizontalMoviesListView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(moviesViewModel.movies) { movie in
-                        // TODO: Change that to display a default image when needed
-                        AsyncImage(url: movie.posterUrl!, configuration: {$0.resizable()})
-                            .frame(width: 110, height: 180)
-                            .cornerRadius(8.0)
+                       MovieCell(for: movie)
                     }
                 }
                 .frame(height: 190)

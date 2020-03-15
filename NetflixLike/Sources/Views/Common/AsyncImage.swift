@@ -12,10 +12,14 @@ struct AsyncImage: View {
     @ObservedObject private var loader: ImageLoaderViewModel
     @State var shouldAnimate = true
     private let configuration: (Image) -> Image
+    private let defaultView: (() -> AnyView?)?
 
-    init(url: URL, configuration: @escaping (Image) -> Image = { $0 }) {
+    init(url: URL,
+         configuration: @escaping (Image) -> Image = { $0 },
+         defaultView: (() -> AnyView?)? = nil ) {
         self.configuration = configuration
         loader = ImageLoaderViewModel(url: url)
+        self.defaultView = defaultView
     }
     var body: some View {
         image
@@ -26,9 +30,14 @@ struct AsyncImage: View {
             if loader.image != nil {
                 configuration(Image(uiImage: loader.image!))
             } else {
-                ActivityIndicator(shouldAnimate: self.$shouldAnimate)
-                           .onAppear(perform: loader.load)
-                           .onDisappear(perform: loader.cancel)
+                if defaultView != nil {
+                    defaultView?().onAppear(perform: loader.load)
+                    .onDisappear(perform: loader.cancel)
+                } else {
+                    ActivityIndicator(shouldAnimate: self.$shouldAnimate)
+                                              .onAppear(perform: loader.load)
+                                              .onDisappear(perform: loader.cancel)
+                }
             }
         }
     }

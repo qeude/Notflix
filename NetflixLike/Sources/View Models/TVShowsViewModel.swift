@@ -16,6 +16,7 @@ class TVShowsViewModel: ObservableObject {
     private var disposables = Set<AnyCancellable>()
 
     init(fetcher: APIRequest<APIResponseList<TVShow>>) {
+        // FIXME: Should handle error here
         APIClient().send(fetcher).sink(receiveCompletion: { (completion) in
             switch completion {
             case .failure:
@@ -23,9 +24,9 @@ class TVShowsViewModel: ObservableObject {
             case .finished:
                 break
             }
-        }) { (response) in
+        }, receiveValue: { (response) in
             self.tvShows = response.results
-        }
+        })
         .store(in: &disposables)
     }
 }
