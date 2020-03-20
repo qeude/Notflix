@@ -28,7 +28,7 @@ struct AsyncImage: View {
     private var image: some View {
         Group {
             if loader.image != nil {
-                configuration(Image(uiImage: loader.image!))
+                configuration(Image(uiImage: loader.image!)                    .renderingMode(.original))
             } else {
                 if defaultView != nil {
                     defaultView?().onAppear(perform: loader.load)

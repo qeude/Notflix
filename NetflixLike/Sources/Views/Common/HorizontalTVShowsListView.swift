@@ -26,12 +26,12 @@ struct HorizontalTVShowsListView: View {
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(.white)
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
+                HStack(spacing: 20) {
                     ForEach(tvShowsViewModel.tvShows) { tvShow in
                         TVShowCell(for: tvShow)
                     }
                 }
-                .frame(height: 190)
+                .frame(height: 245)
                 .padding(.leading, 10)
             }
         }

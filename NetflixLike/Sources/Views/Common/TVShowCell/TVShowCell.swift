@@ -16,18 +16,10 @@ struct TVShowCell: View {
     }
 
     var body: some View {
-        Group {
-            AsyncImage(url: tvShow.posterUrl!,
-                       configuration: {$0.resizable()},
-                       defaultView: {
-                        AnyView(
-                            Text(self.tvShow.title)
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.white)
-                        )
-            }).frame(width: 110, height: 180)
-                .background(Color.darkGray)
-                .cornerRadius(8.0)
+        NavigationLink(destination: TVShowDetails(tvShow: tvShow)) {
+            Group {
+                TVShowPosterImage(for: tvShow)
+            }
         }
     }
 }
