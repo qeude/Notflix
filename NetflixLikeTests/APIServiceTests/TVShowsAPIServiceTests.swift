@@ -133,4 +133,36 @@ class TVShowsAPIServiceTests: NetflixLikeTests {
 
         wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
     }
+
+    func testGetTVSeason() {
+        var episodes: [Episode]?
+
+        let publisher = APIClient().send(APIEndpoints.tvSeason(tvShowId: 1402, tvSeasonNumber: 1))
+
+        XCTAssertNotNil(publisher)
+
+        let expectationFinished = XCTestExpectation(description: "finished")
+        let expectationReceive = XCTestExpectation(description: "receiveValue")
+        let expectationFailure = XCTestExpectation(description: "failure")
+        expectationFailure.isInverted = true
+
+        let cancellable = publisher.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure:
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            episodes = response.episodes
+            expectationReceive.fulfill()
+        })
+        // Disable never used warning
+        _ = cancellable
+
+        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        XCTAssertNotNil(episodes)
+        XCTAssertEqual(episodes?.count, 6)
+    }
 }
