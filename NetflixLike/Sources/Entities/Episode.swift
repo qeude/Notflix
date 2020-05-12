@@ -18,7 +18,6 @@ struct Episode: Decodable, Encodable {
     let voteAverage: Double
     let voteCount: Int
 
-
     var stillUrl: URL? {
            guard let stillPath = stillPath else {
                return nil

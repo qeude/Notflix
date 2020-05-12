@@ -10,7 +10,9 @@ import Foundation
 
 class APIRequest<E: Decodable>: Encodable {
     let path: String
-    init(path: String) {
+    let parameters: [String: String]?
+    init(path: String, parameters: [String: String]? = nil) {
         self.path = path
+        self.parameters = parameters
     }
 }

@@ -10,11 +10,11 @@ import SwiftUI
 import CocoaLumberjack
 
 struct HorizontalTVShowsListView: View {
-    @ObservedObject var tvShowsViewModel: TVShowsViewModel
+    @ObservedObject var tvShowsViewModel: HorizontalTVShowsListViewModel
 
     var listName: String
 
-    init(tvShowsViewModel: TVShowsViewModel, listName: String = "") {
+    init(tvShowsViewModel: HorizontalTVShowsListViewModel, listName: String = "") {
         self.tvShowsViewModel = tvShowsViewModel
         self.listName = listName
     }
@@ -43,7 +43,8 @@ struct HorizontalTVShowsListView_Previews: PreviewProvider {
     static var previews: some View {
          ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
-            HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.popularTVShows), listName: "Popular TV Shows")
+            HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.popularTVShows),
+                                      listName: "Popular TV Shows")
         }
     }
 }

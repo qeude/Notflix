@@ -16,6 +16,7 @@ struct MoviePosterImage: View {
     }
 
     var body: some View {
+        //FIXME: fix unwrapping
         AsyncImage(url: movie.posterUrl!,
                    configuration: {$0.resizable()},
                    defaultView: {

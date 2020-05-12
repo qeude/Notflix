@@ -1,8 +1,8 @@
 //
-//  TVShowViewModel.swift
+//  TVShowsViewModel.swift
 //  NetflixLike
 //
-//  Created by Quentin Eude on 12/05/2020.
+//  Created by Quentin Eude on 03/03/2020.
 //  Copyright © 2020 Quentin Eude. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import CocoaLumberjack
 
-class TVShowsViewModel: ObservableObject {
+class HorizontalTVShowsListViewModel: ObservableObject {
     enum State {
         case initial
         case loading
@@ -18,28 +18,28 @@ class TVShowsViewModel: ObservableObject {
         case data
     }
 
-    @Published var genres = [Genre]()
+    @Published var tvShows = [TVShow]()
     @Published var state: State = .initial
 
     private var disposables = Set<AnyCancellable>()
 
-    init() {
-        self.fetchGenres()
+    init(fetcher: APIRequest<APIResponseList<TVShow>>) {
+        self.fetchTVShows(fetcher: fetcher)
     }
 
-    private func fetchGenres() {
+    private func fetchTVShows(fetcher: APIRequest<APIResponseList<TVShow>>) {
         self.state = .loading
-        APIClient().send(APIEndpoints.tvShowGenres).sink(receiveCompletion: { (completion) in
+        APIClient().send(fetcher).sink(receiveCompletion: { (completion) in
             switch completion {
             case .failure:
                 self.state = .error
-                self.genres = []
+                self.tvShows = []
             case .finished:
                 break
             }
         }, receiveValue: { (response) in
             self.state = .data
-            self.genres = Array(response.genres.shuffled().prefix(5))
+            self.tvShows = response.results
         })
         .store(in: &disposables)
     }

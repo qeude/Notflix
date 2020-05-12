@@ -16,18 +16,28 @@ struct TVShowPosterImage: View {
     }
 
     var body: some View {
-        AsyncImage(url: tvShow.posterUrl!,
-                   configuration: {$0.resizable()},
-                   defaultView: {
-                    AnyView(
-                        Text(self.tvShow.title)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                    )
-        }).frame(width: 150, height: 245)
-            .background(Color.darkGray)
-            .cornerRadius(8.0)
+        Group {
+            if tvShow.posterUrl != nil {
+                AsyncImage(url: tvShow.posterUrl!,
+                           configuration: {$0.resizable()},
+                           defaultView: {
+                            AnyView(
+                                Text(self.tvShow.title)
+                                    .fontWeight(.bold)
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.white)
+                            )
+                })
+            } else {
+                Text(self.tvShow.title)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+            }
+        }
+        .frame(width: 150, height: 245)
+        .background(Color.darkGray)
+        .cornerRadius(8.0)
     }
 }
 

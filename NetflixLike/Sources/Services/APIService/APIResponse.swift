@@ -29,3 +29,11 @@ struct APIResponseTVSeason: Decodable {
         case episodes
     }
 }
+
+struct APIResponseGenres: Decodable {
+    let genres: [Genre]
+
+    enum CodingKeys: String, CodingKey {
+        case genres
+    }
+}

@@ -56,12 +56,10 @@ public class APIClient {
             URLQueryItem(name: "api_key", value: publicKey)
         ]
 
-        let customQueryItems: [URLQueryItem]
+        var customQueryItems: [URLQueryItem] = []
 
-        do {
-            customQueryItems = try URLQueryItemEncoder.encode(request)
-        } catch {
-            fatalError("Wrong parameters: \(error)")
+        request.parameters?.forEach { (key, value) in
+            customQueryItems.append(URLQueryItem(name: key, value: value))
         }
 
         components.queryItems = commonQueryItems + customQueryItems

@@ -14,6 +14,10 @@
 
 "tvshows.popular.title" = "Popular TV shows";
 "tvshows.toprated.title" = "Top rated TV shows";
+"tvshows.with.genre.title" = "%@ TV shows";
+
+"tvshow.details.recommendations" = "Recommendations";
 
 "movies.popular.title" = "Popular movies";
 "movies.toprated.title" = "Top rated movies";
+

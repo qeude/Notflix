@@ -54,6 +54,7 @@ struct TVShowDetails: View {
                         .padding([.leading, .trailing], 30)
                 }.frame(maxWidth: .infinity)
                     .background(
+                        //FIXME: Fix unwrapping
                         AsyncImage(url: tvShow.posterUrl!,
                                    configuration: {$0.resizable()})
                             .aspectRatio(contentMode: .fill)
@@ -86,8 +87,8 @@ struct TVShowDetails: View {
     var recommendations: some View {
         Group {
             self.tvShowDetailsViewModel.tvShow.map { tvShow in
-                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.recommendationsTVShows(tvShowId: tvShow.id)),
-                                          listName: "Recommendations")
+                HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.recommendationsTVShows(tvShowId: tvShow.id)),
+                                          listName: L10n.Tvshow.Details.recommendations)
             }
         }
         .padding(.bottom, 80)
