@@ -45,7 +45,7 @@ struct MoviePosterImage_Previews: PreviewProvider {
                                       video: false,
                                       adult: false,
                                       voteCount: 2860,
-                                      genreIds: [6125, 2],
+                                      genreIds: [6125, 2], genres: nil,
                                       posterPath: "/pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg",
                                       backdropPath: "/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg",
                                       releaseDate: "2019-11-20"))

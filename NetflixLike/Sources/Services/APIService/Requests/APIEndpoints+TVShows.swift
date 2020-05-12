@@ -13,4 +13,5 @@ extension APIEndpoints {
     static let topRatedTVShows = APIRequest<APIResponseList<TVShow>>(path: "tv/top_rated")
     static func recommendationsTVShows(tvShowId: Int) -> APIRequest<APIResponseList<TVShow>> { return APIRequest(path: "tv/\(tvShowId)/recommendations") }
     static func tvShow(tvShowId: Int) -> APIRequest<TVShow> { return APIRequest(path: "tv/\(tvShowId)")}
+    static func tvSeason(tvShowId: Int, tvSeasonNumber: Int) -> APIRequest<APIResponseTVSeason> { return APIRequest(path: "tv/\(tvShowId)/season/\(tvSeasonNumber)")}
 }

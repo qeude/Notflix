@@ -17,6 +17,7 @@ struct Movie: Decodable, Identifiable {
     let adult: Bool
     let voteCount: Int
     let genreIds: [Int]?
+    let genres: [Genre]?
     let posterPath: String?
     let backdropPath: String?
     let releaseDate: String?
@@ -45,6 +46,7 @@ struct Movie: Decodable, Identifiable {
         case video
         case adult
         case voteCount = "vote_count"
+        case genres
         case genreIds = "genre_ids"
         case posterPath = "poster_path"
         case backdropPath = "backdrop_path"

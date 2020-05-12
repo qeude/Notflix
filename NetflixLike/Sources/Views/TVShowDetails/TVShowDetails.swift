@@ -8,15 +8,17 @@
 
 import SwiftUI
 import CocoaLumberjack
+import Combine
 
 struct TVShowDetails: View {
-    private let tvShow: TVShow
+    @ObservedObject private var tvShowDetailsViewModel: TVShowDetailsViewModel
     private var firstAirYear: String?
 
-    init(tvShow: TVShow) {
-        self.tvShow = tvShow
+    init(tvShowId: Int) {
+        UIScrollView.appearance().bounces = false
+        self.tvShowDetailsViewModel = TVShowDetailsViewModel(tvShowId: tvShowId)
         let calendar = Calendar.current
-        if let formattedFirstAirDate = self.tvShow.formattedFirstAirDate {
+        if let formattedFirstAirDate = self.tvShowDetailsViewModel.tvShow?.formattedFirstAirDate {
             self.firstAirYear = String(calendar.component(.year, from: formattedFirstAirDate))
         }
     }
@@ -25,35 +27,59 @@ struct TVShowDetails: View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
             ScrollView(.vertical, showsIndicators: true) {
-                header
+                VStack(alignment: .leading, spacing: 10) {
+                    header
+                    episodes
+                }
             }.edgesIgnoringSafeArea(.all)
                 .foregroundColor(.white)
         }
     }
 
     var header: some View {
-        VStack(alignment: .center, spacing: 20) {
-            TVShowPosterImage(for: tvShow)
-            Text(tvShow.title)
-                .font(.system(size: 32, weight: .bold))
-            HStack(alignment: .center, spacing: 60) {
-                Text(String(format: "%.1f", tvShow.voteAverage)).fontWeight(.semibold)
-                Text(self.firstAirYear!).fontWeight(.semibold)
-            }.frame(maxWidth: .infinity)
-            Text(tvShow.overview ?? "")
-                .lineLimit(5)
-                .multilineTextAlignment(.center)
-                .padding([.leading, .trailing], 30)
-        }.frame(maxWidth: .infinity)
-            .background(
-                AsyncImage(url: tvShow.posterUrl!,
-                           configuration: {$0.resizable()})
-                    .aspectRatio(contentMode: .fill)
-                    .blur(radius: 20, opaque: true)
-        )
-            .padding(.top, 70)
-            .padding(.bottom, 40)
-            .clipped()
+        Group {
+            self.tvShowDetailsViewModel.tvShow.map { tvShow in
+                VStack(alignment: .center, spacing: 20) {
+                    TVShowPosterImage(for: tvShow)
+                    Text(tvShow.title)
+                        .font(.system(size: 32, weight: .bold))
+                    HStack(alignment: .center, spacing: 60) {
+                        Text(String(format: "%.1f", tvShow.voteAverage)).fontWeight(.semibold)
+                        //                Text(self.firstAirYear!).fontWeight(.semibold)
+                    }.frame(maxWidth: .infinity)
+                    Text(tvShow.overview ?? "")
+                        .lineLimit(5)
+                        .multilineTextAlignment(.center)
+                        .padding([.leading, .trailing], 30)
+                }.frame(maxWidth: .infinity)
+                    .background(
+                        AsyncImage(url: tvShow.posterUrl!,
+                                   configuration: {$0.resizable()})
+                            .aspectRatio(contentMode: .fill)
+                            .blur(radius: 20, opaque: true)
+                )
+                    .padding(.top, 90)
+                    .padding(.bottom, 40)
+                    .clipped()
+            }
+        }
+    }
+
+    var episodes: some View {
+        Group {
+            self.tvShowDetailsViewModel.tvShow.map { tvShow in
+                tvShow.seasons.map { tvSeasons in
+                    VStack(alignment: .leading, spacing: 20) {
+                        ForEach(tvSeasons.sorted {$0.seasonNumber > $1.seasonNumber}, id: \.id) { season in
+                            VStack(alignment: .leading) {
+                                Text(season.name).font(.system(size: 32, weight: .bold))
+                                TVSeasonListView(tvShowId: tvShow.id, tvSeasonNumber: season.seasonNumber)
+                            }
+                        }
+                    }
+                }
+            }
+        }.padding(.all, 16)
     }
 }
 
@@ -61,17 +87,7 @@ struct TVShowDetails_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
-            TVShowDetails(tvShow: TVShow(id: 1402,
-                                         title: "The Walking Dead",
-                                         // swiftlint:disable:next line_length
-                                         overview: "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way.",
-                                         popularity: 124.898,
-                                         voteAverage: 7.3,
-                                         voteCount: 4607,
-                                         genreIds: [10759, 18, 10765],
-                                         posterPath: "/5l10EjdgPxu8Gbl5Ww6SWkVQH6T.jpg",
-                                         backdropPath: "/wXXaPMgrv96NkH8KD1TMdS2d7iq.jpg",
-                                         firstAirDate: "2010-10-31"))
+            TVShowDetails(tvShowId: 1402)
         }
     }
 }

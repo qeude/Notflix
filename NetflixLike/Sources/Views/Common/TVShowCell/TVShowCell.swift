@@ -16,7 +16,7 @@ struct TVShowCell: View {
     }
 
     var body: some View {
-        NavigationLink(destination: TVShowDetails(tvShow: tvShow)) {
+        NavigationLink(destination: TVShowDetails(tvShowId: tvShow.id)) {
             Group {
                 TVShowPosterImage(for: tvShow)
             }
@@ -38,9 +38,16 @@ struct TVShowCell_Previews: PreviewProvider {
                                   popularity: 124.898,
                                   voteAverage: 7.3,
                                   voteCount: 4607,
-                                  genreIds: [10759, 18, 10765],
+                                  genreIds: [10759, 18, 10765], genres: nil,
                                   posterPath: "/5l10EjdgPxu8Gbl5Ww6SWkVQH6T.jpg",
                                   backdropPath: "/wXXaPMgrv96NkH8KD1TMdS2d7iq.jpg",
-                                  firstAirDate: "2010-10-31"))
+                                  firstAirDate: "2010-10-31", seasons: [
+                                    TVSeason(id: 1,
+                                             name: "saison 1",
+                                             overview: "overview",
+                                             seasonNumber: 1,
+                                             posterPath: "/5l10EjdgPxu8Gbl5Ww6SWkVQH6T.jpg"
+                                    )]
+        ))
     }
 }

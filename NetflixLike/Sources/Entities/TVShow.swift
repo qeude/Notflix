@@ -15,9 +15,11 @@ struct TVShow: Decodable, Identifiable {
     let voteAverage: Double
     let voteCount: Int
     let genreIds: [Int]?
+    let genres: [Genre]?
     let posterPath: String?
     let backdropPath: String?
     let firstAirDate: String
+    let seasons: [TVSeason]?
 
     var posterUrl: URL? {
         guard let posterPath = posterPath else {
@@ -53,8 +55,10 @@ struct TVShow: Decodable, Identifiable {
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
         case genreIds = "genre_ids"
+        case genres
         case posterPath = "poster_path"
         case backdropPath = "backdrop_path"
         case firstAirDate = "first_air_date"
+        case seasons
     }
 }

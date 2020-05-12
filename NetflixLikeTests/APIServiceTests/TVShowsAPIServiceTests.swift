@@ -98,6 +98,10 @@ class TVShowsAPIServiceTests: NetflixLikeTests {
         wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
         XCTAssertNotNil(tvShow)
         XCTAssertEqual(tvShow?.title, "The Walking Dead")
+        guard let seasons = tvShow?.seasons else {
+            fatalError()
+        }
+        XCTAssertGreaterThan(seasons.count, 0)
     }
 
     func testFetchRecommendationsTVShows() {
