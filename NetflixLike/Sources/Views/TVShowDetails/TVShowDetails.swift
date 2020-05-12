@@ -30,6 +30,7 @@ struct TVShowDetails: View {
                 VStack(alignment: .leading, spacing: 10) {
                     header
                     episodes
+                    recommendations
                 }
             }.edgesIgnoringSafeArea(.all)
                 .foregroundColor(.white)
@@ -80,6 +81,16 @@ struct TVShowDetails: View {
                 }
             }
         }.padding(.all, 16)
+    }
+
+    var recommendations: some View {
+        Group {
+            self.tvShowDetailsViewModel.tvShow.map { tvShow in
+                HorizontalTVShowsListView(tvShowsViewModel: TVShowsViewModel(fetcher: APIEndpoints.recommendationsTVShows(tvShowId: tvShow.id)),
+                                          listName: "Recommendations")
+            }
+        }
+        .padding(.bottom, 80)
     }
 }
 
