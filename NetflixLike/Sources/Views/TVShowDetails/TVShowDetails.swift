@@ -13,7 +13,7 @@ import Combine
 struct TVShowDetails: View {
     @ObservedObject private var tvShowDetailsViewModel: TVShowDetailsViewModel
     private var firstAirYear: String?
-
+    
     init(tvShowId: Int) {
         UIScrollView.appearance().bounces = false
         self.tvShowDetailsViewModel = TVShowDetailsViewModel(tvShowId: tvShowId)
@@ -22,7 +22,7 @@ struct TVShowDetails: View {
             self.firstAirYear = String(calendar.component(.year, from: formattedFirstAirDate))
         }
     }
-
+    
     var body: some View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
@@ -49,16 +49,22 @@ struct TVShowDetails: View {
                         //                Text(self.firstAirYear!).fontWeight(.semibold)
                     }.frame(maxWidth: .infinity)
                     Text(tvShow.overview ?? "")
-                        .lineLimit(5)
+                    .font(.system(size: 16, weight: .regular))
+                        .lineLimit(6)
                         .multilineTextAlignment(.center)
                         .padding([.leading, .trailing], 30)
                 }.frame(maxWidth: .infinity)
                     .background(
-                        //FIXME: Fix unwrapping
-                        AsyncImage(url: tvShow.posterUrl!,
-                                   configuration: {$0.resizable()})
-                            .aspectRatio(contentMode: .fill)
-                            .blur(radius: 20, opaque: true)
+                        Group {
+                            if tvShow.posterUrl != nil {
+                                AsyncImage(url: tvShow.posterUrl!,
+                                           configuration: {$0.resizable()})
+                                    .aspectRatio(contentMode: .fill)
+                                    .blur(radius: 20, opaque: true)
+                            } else {
+                                Color.black
+                            }
+                        }
                 )
                     .padding(.top, 90)
                     .padding(.bottom, 40)

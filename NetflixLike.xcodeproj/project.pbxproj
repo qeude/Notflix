@@ -289,7 +289,6 @@
 			children = (
 				01553B40234BCA550018CDF3 /* AppDelegate.swift */,
 				01553B42234BCA550018CDF3 /* SceneDelegate.swift */,
-				01553B44234BCA550018CDF3 /* MainView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -364,6 +363,7 @@
 				01751D59242397E500B04BF4 /* TVShowDetails */,
 				01A1F9FC2374AACA00E734E6 /* Common */,
 				01433ECD240DAB4E0003FA6E /* HomeView.swift */,
+				01553B44234BCA550018CDF3 /* MainView.swift */,
 				01433ECF240DAEA20003FA6E /* SearchView.swift */,
 				01433ED3240DB0CC0003FA6E /* MoviesView.swift */,
 			);

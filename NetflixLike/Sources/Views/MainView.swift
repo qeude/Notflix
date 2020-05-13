@@ -19,7 +19,6 @@ struct MainView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             ZStack {
-                Color(.black).edgesIgnoringSafeArea(.all)
                 HomeView()
             }
             .tabItem {
@@ -27,7 +26,6 @@ struct MainView: View {
                 Text(L10n.Tab.home)
             }.tag(0)
             ZStack {
-                Color(.black).edgesIgnoringSafeArea(.all)
                 SearchView()
             }
             .tabItem {
@@ -36,7 +34,6 @@ struct MainView: View {
             }.tag(1)
         }
         .accentColor(.red)
-        .edgesIgnoringSafeArea(.top)
         .font(.headline)
     }
 }

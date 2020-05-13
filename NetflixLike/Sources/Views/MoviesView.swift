@@ -10,13 +10,11 @@ import SwiftUI
 
 struct MoviesView: View {
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 25) {
-                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: L10n.Movies.Popular.title)
-                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: L10n.Movies.Toprated.title)
-                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: L10n.Movies.Popular.title)
-                HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: L10n.Movies.Toprated.title)
-            }
+        VStack(alignment: .leading, spacing: 25) {
+            HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: L10n.Movies.Popular.title)
+            HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: L10n.Movies.Toprated.title)
+            HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: L10n.Movies.Popular.title)
+            HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.topRatedMovies), listName: L10n.Movies.Toprated.title)
         }
     }
 }

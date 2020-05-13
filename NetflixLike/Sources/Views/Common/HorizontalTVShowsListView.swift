@@ -22,7 +22,7 @@ struct HorizontalTVShowsListView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(listName)
-                .padding(.leading, 10)
+                .padding(.leading, 16)
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(.white)
             ScrollView(.horizontal, showsIndicators: false) {

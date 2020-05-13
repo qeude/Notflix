@@ -16,16 +16,14 @@ struct TVShowsView: View {
     }
 
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 25) {
-                HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.popularTVShows),
-                                          listName: L10n.Tvshows.Popular.title)
-                HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.topRatedTVShows),
-                                          listName: L10n.Tvshows.Toprated.title)
-                ForEach(tvShowViewModel.genres, id: \.id) { genre in
-                    HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.tvShowsForGenres(genreId: genre.id)),
-                                              listName: L10n.Tvshows.With.Genre.title(genre.name))
-                }
+        VStack(alignment: .leading, spacing: 25) {
+            HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.popularTVShows),
+                                      listName: L10n.Tvshows.Popular.title)
+            HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.topRatedTVShows),
+                                      listName: L10n.Tvshows.Toprated.title)
+            ForEach(tvShowViewModel.genres, id: \.id) { genre in
+                HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.tvShowsForGenres(genreId: genre.id)),
+                                          listName: L10n.Tvshows.With.Genre.title(genre.name))
             }
         }
     }

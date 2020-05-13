@@ -16,17 +16,25 @@ struct MoviePosterImage: View {
     }
 
     var body: some View {
-        //FIXME: fix unwrapping
-        AsyncImage(url: movie.posterUrl!,
-                   configuration: {$0.resizable()},
-                   defaultView: {
-                    AnyView(
-                        Text(self.movie.title)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                    )
-        }).frame(width: 150, height: 245)
+        Group {
+            if movie.posterUrl != nil {
+                AsyncImage(url: movie.posterUrl!,
+                           configuration: {$0.resizable()},
+                           defaultView: {
+                            AnyView(
+                                Text(self.movie.title)
+                                    .fontWeight(.bold)
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.white)
+                            )
+                })
+            } else {
+                Text(self.movie.title)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+            }
+        }.frame(width: 150, height: 245)
             .background(Color.darkGray)
             .cornerRadius(8.0)
     }
