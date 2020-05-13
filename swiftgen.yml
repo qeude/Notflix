@@ -1,6 +1,6 @@
 strings:
-    inputs: NetflixLike/Resources/Base.lproj
+    inputs: Notflix/Resources/Base.lproj
     filter: .+\.strings$
     outputs:
         templateName: structured-swift4
-        output: NetflixLike/Sources/Generated/Strings.swift
+        output: Notflix/Sources/Generated/Strings.swift
