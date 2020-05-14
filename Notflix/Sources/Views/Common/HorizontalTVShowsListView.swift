@@ -21,24 +21,31 @@ struct HorizontalTVShowsListView: View {
 
     var body: some View {
         Group {
-            if !tvShowsViewModel.tvShows.isEmpty {
+            if tvShowsViewModel.state == .loading {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(listName)
-                        .padding(.leading, 16)
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.white)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 20) {
-                            ForEach(tvShowsViewModel.tvShows) { tvShow in
-                                TVShowCell(for: tvShow)
-                            }
-                        }
-                        .frame(height: 245)
-                        .padding(.leading, 10)
-                    }
-                }
+                    ShimmerView().frame(height: 32)
+                    ShimmerView().frame(height: 245)
+                }.padding([.leading, .trailing], 10)
             } else {
-                Rectangle().fill(Color.clear)
+                if !tvShowsViewModel.tvShows.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(listName)
+                            .padding(.leading, 16)
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(.white)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(tvShowsViewModel.tvShows) { tvShow in
+                                    TVShowCell(for: tvShow)
+                                }
+                            }
+                            .frame(height: 245)
+                            .padding(.leading, 10)
+                        }
+                    }
+                } else {
+                    Rectangle().fill(Color.clear)
+                }
             }
         }
     }
