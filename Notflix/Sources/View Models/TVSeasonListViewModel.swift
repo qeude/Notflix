@@ -14,7 +14,6 @@ class TVSeasonListViewModel: ObservableObject {
 
     private var disposables = Set<AnyCancellable>()
     private(set) var isLoading = false
-    private static let episodeProcessingQueue = DispatchQueue(label: "episode-processing")
 
     init(tvShowId: Int, tvSeasonNumber: Int) {
         load(tvShowId: tvShowId, tvSeasonNumber: tvSeasonNumber)

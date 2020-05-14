@@ -11,11 +11,11 @@ import SwiftUI
 struct AsyncImage: View {
     @ObservedObject private var loader: ImageLoaderViewModel
     @State var shouldAnimate = true
-    private let configuration: (Image) -> Image
+    private let configuration: (Image) -> AnyView
     private let defaultView: (() -> AnyView?)?
 
     init(url: URL,
-         configuration: @escaping (Image) -> Image = { $0 },
+         configuration: @escaping (Image) -> AnyView = { AnyView($0) },
          defaultView: (() -> AnyView?)? = nil ) {
         self.configuration = configuration
         loader = ImageLoaderViewModel(url: url)
@@ -28,15 +28,16 @@ struct AsyncImage: View {
     private var image: some View {
         Group {
             if loader.image != nil {
-                configuration(Image(uiImage: loader.image!)                    .renderingMode(.original))
+                configuration(Image(uiImage: loader.image!)
+                    .renderingMode(.original))
             } else {
                 if defaultView != nil {
                     defaultView?().onAppear(perform: loader.load)
-                    .onDisappear(perform: loader.cancel)
+                        .onDisappear(perform: loader.cancel)
                 } else {
                     ActivityIndicator(shouldAnimate: self.$shouldAnimate)
-                                              .onAppear(perform: loader.load)
-                                              .onDisappear(perform: loader.cancel)
+                        .onAppear(perform: loader.load)
+                        .onDisappear(perform: loader.cancel)
                 }
             }
         }

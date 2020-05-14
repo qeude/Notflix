@@ -19,7 +19,7 @@ struct MoviePosterImage: View {
         Group {
             if movie.posterUrl != nil {
                 AsyncImage(url: movie.posterUrl!,
-                           configuration: {$0.resizable()},
+                           configuration: {AnyView($0.resizable())},
                            defaultView: {
                             AnyView(
                                 Text(self.movie.title)
