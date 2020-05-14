@@ -47,7 +47,7 @@ struct HorizontalTVShowsListView: View {
                     Rectangle().fill(Color.clear)
                 }
             }
-        }
+        }.transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.5)))
     }
 }
 

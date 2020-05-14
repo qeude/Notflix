@@ -42,8 +42,8 @@ struct TVShowDetails: View {
             headerBackground
             headerForeground
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 620, alignment: .topLeading)
-        .padding(.bottom, 20)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 500, alignment: .topLeading)
+        .padding(.bottom, 10)
         .clipped()
     }
 
@@ -56,7 +56,6 @@ struct TVShowDetails: View {
                                    configuration: {
                                     AnyView(
                                         AnyView($0.resizable())
-                                            .scaledToFit()
                                             .blur(radius: 25, opaque: true)
                                     )
                         },
@@ -64,7 +63,6 @@ struct TVShowDetails: View {
                                     AnyView(
                                         Rectangle()
                                             .fill(Color.darkerGray)
-                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
                                     )
                         })
                     } else {
@@ -79,9 +77,9 @@ struct TVShowDetails: View {
         Group {
             self.tvShowDetailsViewModel.tvShow.map { tvShow in
                 VStack(alignment: .center, spacing: 20) {
-                    TVShowPosterImage(for: tvShow)
+                    TVShowPosterImage(for: tvShow).padding(.top, 50)
                     Text(tvShow.title)
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.system(size: 32, weight: .bold)).minimumScaleFactor(0.5)
                     HStack(alignment: .center, spacing: 60) {
                         ZStack {
                             Circle()
@@ -98,11 +96,10 @@ struct TVShowDetails: View {
                         Text(tvShow.firstAirYearToString).fontWeight(.semibold)
                     }
                     Text(tvShow.overview ?? "")
-                        .font(.system(size: 16, weight: .regular))
-                        .lineLimit(8)
+                        .font(.system(size: 12, weight: .regular))
+                        .lineLimit(5)
                         .multilineTextAlignment(.center)
-                        .padding([.leading, .trailing], 30)
-                }
+                }.padding([.leading, .trailing, .bottom], 16)
             }
         }
     }
@@ -118,7 +115,8 @@ struct TVShowDetails: View {
                     }
                 }
             }
-        }.padding(.all, 16)
+        }.padding(.top, 8)
+        .padding([.leading, .trailing, .bottom], 16)
     }
 
     var recommendations: some View {
@@ -128,7 +126,7 @@ struct TVShowDetails: View {
                                           listName: L10n.Tvshow.Details.recommendations)
             }
         }
-        .padding(.bottom, 80)
+        .padding(.bottom, 90)
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MainView: View {
     @State public var selectedTab: Int = 0
+    @State public var showSplashScreen: Bool = true
 
     init() {
         UITabBar.appearance().barTintColor = UIColor.black
@@ -17,24 +18,37 @@ struct MainView: View {
     }
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            ZStack {
-                HomeView()
+        ZStack {
+            TabView(selection: $selectedTab) {
+                ZStack {
+                    HomeView()
+                }
+                .tabItem {
+                    Image(systemName: "house")
+                    Text(L10n.Tab.home)
+                }.tag(0)
+                ZStack {
+                    SearchView()
+                }
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text(L10n.Tab.search)
+                }.tag(1)
             }
-            .tabItem {
-                Image(systemName: "house")
-                Text(L10n.Tab.home)
-            }.tag(0)
-            ZStack {
-                SearchView()
+            .accentColor(.red)
+            .font(.headline)
+            .zIndex(9999)
+            if showSplashScreen {
+                SplashscreenView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            self.showSplashScreen = false
+                        }
+                }
+                .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.4)))
+                .zIndex(99999) //Workaround to ensure the transition is working both ways
             }
-            .tabItem {
-                Image(systemName: "magnifyingglass")
-                Text(L10n.Tab.search)
-            }.tag(1)
         }
-        .accentColor(.red)
-        .font(.headline)
     }
 }
 

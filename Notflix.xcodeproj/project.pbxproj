@@ -39,6 +39,7 @@
 		01553B6B234BCCA10018CDF3 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01553B6A234BCCA10018CDF3 /* Movie.swift */; };
 		01581667246C883200E36AB9 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01581666246C883200E36AB9 /* Strings.swift */; };
 		015A7488246D65E200147EB2 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A7487246D65E200147EB2 /* ShimmerView.swift */; };
+		015A748A246DACBB00147EB2 /* SplashscreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A7489246DACBB00147EB2 /* SplashscreenView.swift */; };
 		01751D5B242397FF00B04BF4 /* TVShowDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01751D5A242397FF00B04BF4 /* TVShowDetails.swift */; };
 		01751D5D2423992A00B04BF4 /* TVShowPosterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01751D5C2423992A00B04BF4 /* TVShowPosterImage.swift */; };
 		01751D6224242BDD00B04BF4 /* MoviePosterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01751D6124242BDD00B04BF4 /* MoviePosterImage.swift */; };
@@ -119,6 +120,7 @@
 		01553B6A234BCCA10018CDF3 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		01581666246C883200E36AB9 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		015A7487246D65E200147EB2 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
+		015A7489246DACBB00147EB2 /* SplashscreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashscreenView.swift; sourceTree = "<group>"; };
 		01751D5A242397FF00B04BF4 /* TVShowDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetails.swift; sourceTree = "<group>"; };
 		01751D5C2423992A00B04BF4 /* TVShowPosterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowPosterImage.swift; sourceTree = "<group>"; };
 		01751D6124242BDD00B04BF4 /* MoviePosterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterImage.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				01553B44234BCA550018CDF3 /* MainView.swift */,
 				01433ECF240DAEA20003FA6E /* SearchView.swift */,
 				01433ED3240DB0CC0003FA6E /* MoviesView.swift */,
+				015A7489246DACBB00147EB2 /* SplashscreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015A748A246DACBB00147EB2 /* SplashscreenView.swift in Sources */,
 				01751D682424F16000B04BF4 /* TVShowDetailsViewModel.swift in Sources */,
 				01433ECE240DAB4E0003FA6E /* HomeView.swift in Sources */,
 				01553B41234BCA550018CDF3 /* AppDelegate.swift in Sources */,
@@ -830,8 +834,10 @@
 			baseConfigurationReference = FF1D2348CB4817935D3A681C /* Pods-Notflix.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Notflix/Preview Content\"";
+				DEVELOPMENT_TEAM = 83Q998B277;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Notflix/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -840,6 +846,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qeude.Notflix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -850,8 +857,10 @@
 			baseConfigurationReference = 04D1D423CACC272B32A65875 /* Pods-Notflix.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Notflix/Preview Content\"";
+				DEVELOPMENT_TEAM = 83Q998B277;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Notflix/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -860,6 +869,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qeude.Notflix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

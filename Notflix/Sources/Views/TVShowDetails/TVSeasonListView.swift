@@ -66,7 +66,9 @@ struct TVSeasonListView: View {
                     }
                 }
             }
-        }.padding(.bottom, 40)
+        }
+        .transition(.opacity)
+        .padding(.bottom, 40)
     }
 }
 
