@@ -47,6 +47,10 @@ struct TVShow: Decodable, Identifiable {
         return date
     }
 
+    var firstAirYearToString: String {
+        return firstAirDate.split(separator: "-").map(String.init).first ?? ""
+    }
+
     enum CodingKeys: String, CodingKey {
         case id
         case title = "name"

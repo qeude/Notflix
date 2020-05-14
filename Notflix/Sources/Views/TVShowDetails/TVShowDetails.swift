@@ -83,8 +83,19 @@ struct TVShowDetails: View {
                     Text(tvShow.title)
                         .font(.system(size: 32, weight: .bold))
                     HStack(alignment: .center, spacing: 60) {
-                        Text(String(format: "%.1f", tvShow.voteAverage)).fontWeight(.semibold)
-                        //                Text(self.firstAirYear!).fontWeight(.semibold)
+                        ZStack {
+                            Circle()
+                                .fill(Color.clear)
+                                .frame(width: 40, height: 40)
+                                .overlay (
+                                    Circle()
+                                        .trim(from: 0, to: CGFloat(tvShow.voteAverage * 0.1))
+                                        .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                                        .fill(tvShow.voteAverage <= 3 ? Color.red : (tvShow.voteAverage < 7 ? Color.orange : Color.green) )
+                            )
+                            Text(String(format: "%.1f", tvShow.voteAverage)).fontWeight(.semibold)
+                        }
+                        Text(tvShow.firstAirYearToString).fontWeight(.semibold)
                     }
                     Text(tvShow.overview ?? "")
                         .font(.system(size: 16, weight: .regular))
