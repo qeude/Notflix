@@ -52,8 +52,8 @@ struct HomeView: View {
 
     func containedView() -> AnyView {
         switch selectedType {
-        case .tvShows: return AnyView(TVShowsView())
-        case .movies: return AnyView(MoviesView())
+        case .tvShows: return AnyView(HomeTVShowsView())
+        case .movies: return AnyView(HomeMoviesView())
         }
     }
 }

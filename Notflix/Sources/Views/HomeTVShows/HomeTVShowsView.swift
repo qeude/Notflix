@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-struct TVShowsView: View {
-    @ObservedObject private var tvShowViewModel: TVShowsViewModel
+struct HomeTVShowsView: View {
+    @ObservedObject private var tvShowViewModel: HomeTVShowsViewModel
 
     init() {
-        self.tvShowViewModel = TVShowsViewModel()
+        self.tvShowViewModel = HomeTVShowsViewModel()
     }
 
     var body: some View {
@@ -22,18 +22,18 @@ struct TVShowsView: View {
             HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.topRatedTVShows),
                                       listName: L10n.Tvshows.Toprated.title)
             ForEach(tvShowViewModel.genres, id: \.id) { genre in
-                HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.tvShowsForGenres(genreId: genre.id)),
+                HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.tvShowsForGenre(genreId: genre.id)),
                                           listName: L10n.Tvshows.With.Genre.title(genre.name))
             }
         }
     }
 }
 
-struct TVShowsView_Previews: PreviewProvider {
+struct HomeTVShowsView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
-            TVShowsView()
+            HomeTVShowsView()
         }
     }
 }

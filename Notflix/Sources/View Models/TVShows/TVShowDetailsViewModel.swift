@@ -42,8 +42,4 @@ class TVShowDetailsViewModel: ObservableObject {
         })
         .store(in: &disposables)
     }
-
-    private func fetchEpisodes(tvShowId: Int, tvSeasonNumber: Int) -> AnyPublisher<APIResponseTVSeason, Error> {
-        return APIClient().send(APIEndpoints.tvSeason(tvShowId: tvShowId, tvSeasonNumber: tvSeasonNumber))
-    }
 }

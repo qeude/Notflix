@@ -9,39 +9,52 @@
 import SwiftUI
 
 struct HorizontalMoviesListView: View {
-    @ObservedObject var moviesViewModel: MoviesViewModel
+   @ObservedObject var horizontalMoviesListViewModel: HorizontalMoviesListViewModel
 
-    var listName: String
+        var listName: String
 
-    init(moviesViewModel: MoviesViewModel, listName: String = "") {
-        self.moviesViewModel = moviesViewModel
-        self.listName = listName
-    }
+        init(horizontalMoviesListViewModel: HorizontalMoviesListViewModel, listName: String = "") {
+            self.horizontalMoviesListViewModel = horizontalMoviesListViewModel
+            self.listName = listName
+        }
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(listName)
-                .padding(.leading, 10)
-                .font(.system(size: 24, weight: .bold))
-                .foregroundColor(.white)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 25) {
-                    ForEach(moviesViewModel.movies) { movie in
-                       MovieCell(for: movie)
+        var body: some View {
+            Group {
+                if horizontalMoviesListViewModel.state == .loading {
+                    VStack(alignment: .leading, spacing: 10) {
+                        ShimmerView().frame(height: 32)
+                        ShimmerView().frame(height: 245)
+                    }.padding([.leading, .trailing], 10)
+                } else {
+                    if !horizontalMoviesListViewModel.movies.isEmpty {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text(listName)
+                                .padding(.leading, 16)
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(.white)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 20) {
+                                    ForEach(horizontalMoviesListViewModel.movies) { movie in
+                                        MovieCell(for: movie)
+                                    }
+                                }
+                                .frame(height: 245)
+                                .padding(.leading, 10)
+                            }
+                        }
+                    } else {
+                        Rectangle().fill(Color.clear)
                     }
                 }
-                .frame(height: 245)
-                .padding(.leading, 10)
-            }
+            }.transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.5)))
         }
     }
-}
-
 struct HorizontalMoviesListView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
-            HorizontalMoviesListView(moviesViewModel: MoviesViewModel(fetcher: APIEndpoints.popularMovies), listName: "Popular Movies")
+            HorizontalMoviesListView(horizontalMoviesListViewModel: HorizontalMoviesListViewModel(fetcher: APIEndpoints.popularMovies),
+                                     listName: "Popular Movies")
         }
     }
 }

@@ -1,16 +1,15 @@
 //
-//  TVShowViewModel.swift
+//  MovieDetailsViewModel.swift
 //  Notflix
 //
-//  Created by Quentin Eude on 12/05/2020.
+//  Created by Quentin Eude on 15/05/2020.
 //  Copyright © 2020 Quentin Eude. All rights reserved.
 //
 
 import Foundation
 import Combine
-import CocoaLumberjack
 
-class TVShowsViewModel: ObservableObject {
+class MovieDetailsViewModel: ObservableObject {
     enum State {
         case initial
         case loading
@@ -18,28 +17,28 @@ class TVShowsViewModel: ObservableObject {
         case data
     }
 
-    @Published var genres = [Genre]()
+    @Published var movie: Movie?
     @Published var state: State = .initial
 
     private var disposables = Set<AnyCancellable>()
 
-    init() {
-        self.fetchGenres()
+    init(movieId: Int) {
+        fetchMovieDetails(movieId: movieId)
     }
 
-    private func fetchGenres() {
+    private func fetchMovieDetails(movieId: Int) {
         self.state = .loading
-        APIClient().send(APIEndpoints.tvShowGenres).sink(receiveCompletion: { (completion) in
+        APIClient().send(APIEndpoints.movie(movieId: movieId)).sink(receiveCompletion: { (completion) in
             switch completion {
             case .failure:
+                self.movie = nil
                 self.state = .error
-                self.genres = []
             case .finished:
                 break
             }
         }, receiveValue: { (response) in
+            self.movie = response
             self.state = .data
-            self.genres = Array(response.genres.shuffled().prefix(5))
         })
         .store(in: &disposables)
     }

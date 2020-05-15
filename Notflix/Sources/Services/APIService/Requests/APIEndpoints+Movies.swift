@@ -11,6 +11,17 @@ import Foundation
 extension APIEndpoints {
     static let popularMovies = APIRequest<APIResponseList<Movie>>(path: "movie/popular")
     static let topRatedMovies = APIRequest<APIResponseList<Movie>>(path: "movie/top_rated")
+    //TODO: Test this
+    static let movieGenres = APIRequest<APIResponseGenres>(path: "genre/movie/list")
     static func recommendationsMovies(movieId: Int) -> APIRequest<APIResponseList<Movie>> { return APIRequest(path: "movie/\(movieId)/recommendations") }
     static func movie(movieId: Int) -> APIRequest<Movie> { return APIRequest(path: "movie/\(movieId)")}
+    //TODO: Test this
+    static func moviesForGenre(genreId: Int) -> APIRequest<APIResponseList<Movie>> {
+        return APIRequest(
+            path: "discover/movie",
+            parameters: [
+                "with_genres": String(genreId)
+            ]
+        )
+    }
 }

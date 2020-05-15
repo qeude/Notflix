@@ -34,9 +34,10 @@ struct MoviePosterImage: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
             }
-        }.frame(width: 150, height: 245)
-            .background(Color.darkGray)
-            .cornerRadius(8.0)
+        }
+        .frame(width: 150, height: 245)
+        .background(Color.darkGray)
+        .cornerRadius(8.0)
     }
 }
 

@@ -20,4 +20,9 @@
 
 "movies.popular.title" = "Popular movies";
 "movies.toprated.title" = "Top rated movies";
+"movies.with.genre.title" = "%@ movies";
+
+"movie.details.recommendations" = "Recommendations";
+
+
 

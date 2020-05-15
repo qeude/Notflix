@@ -37,6 +37,10 @@ struct Movie: Decodable, Identifiable {
            return URL(string: "\(APIClient.baseImageStringUrl)\(backdropPath)")
        }
 
+    var releaseYearToString: String {
+        return releaseDate?.split(separator: "-").map(String.init).first ?? ""
+    }
+
     enum CodingKeys: String, CodingKey {
         case id
         case title

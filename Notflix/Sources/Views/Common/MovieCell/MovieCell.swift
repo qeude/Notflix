@@ -15,8 +15,10 @@ struct MovieCell: View {
         self.movie = movie
     }
     var body: some View {
-        Group {
-            MoviePosterImage(for: movie)
+        NavigationLink(destination: MovieDetails(movieId: movie.id)) {
+            Group {
+                MoviePosterImage(for: movie)
+            }
         }
     }
 }

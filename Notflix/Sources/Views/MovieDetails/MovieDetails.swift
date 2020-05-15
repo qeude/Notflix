@@ -1,21 +1,19 @@
 //
-//  TVShowDetails.swift
+//  MovieDetails.swift
 //  Notflix
 //
-//  Created by Quentin Eude on 19/03/2020.
+//  Created by Quentin Eude on 15/05/2020.
 //  Copyright © 2020 Quentin Eude. All rights reserved.
 //
 
 import SwiftUI
-import CocoaLumberjack
-import Combine
 
-struct TVShowDetails: View {
-    @ObservedObject private var tvShowDetailsViewModel: TVShowDetailsViewModel
+struct MovieDetails: View {
+    @ObservedObject private var movieDetailsViewModel: MovieDetailsViewModel
 
-    init(tvShowId: Int) {
+    init(movieId: Int) {
         UIScrollView.appearance().bounces = false
-        self.tvShowDetailsViewModel = TVShowDetailsViewModel(tvShowId: tvShowId)
+        self.movieDetailsViewModel = MovieDetailsViewModel(movieId: movieId)
     }
 
     var body: some View {
@@ -24,7 +22,6 @@ struct TVShowDetails: View {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading, spacing: 10) {
                     header
-                    episodes
                     recommendations
                 }
             }.edgesIgnoringSafeArea(.all)
@@ -44,10 +41,10 @@ struct TVShowDetails: View {
 
     var headerBackground: some View {
         Group {
-            self.tvShowDetailsViewModel.tvShow.map { tvShow in
+            self.movieDetailsViewModel.movie.map { movie in
                 Group {
-                    if tvShow.posterUrl != nil {
-                        AsyncImage(url: tvShow.posterUrl!,
+                    if movie.posterUrl != nil {
+                        AsyncImage(url: movie.posterUrl!,
                                    configuration: {
                                     AnyView(
                                         AnyView($0.resizable())
@@ -70,10 +67,10 @@ struct TVShowDetails: View {
 
     var headerForeground: some View {
         Group {
-            self.tvShowDetailsViewModel.tvShow.map { tvShow in
+            self.movieDetailsViewModel.movie.map { movie in
                 VStack(alignment: .center, spacing: 20) {
-                    TVShowPosterImage(for: tvShow).padding(.top, 50)
-                    Text(tvShow.title)
+                    MoviePosterImage(for: movie).padding(.top, 50)
+                    Text(movie.title)
                         .font(.system(size: 32, weight: .bold)).minimumScaleFactor(0.5)
                     HStack(alignment: .center, spacing: 60) {
                         ZStack {
@@ -82,15 +79,15 @@ struct TVShowDetails: View {
                                 .frame(width: 40, height: 40)
                                 .overlay (
                                     Circle()
-                                        .trim(from: 0, to: CGFloat(tvShow.voteAverage * 0.1))
+                                        .trim(from: 0, to: CGFloat(movie.voteAverage * 0.1))
                                         .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                                        .fill(tvShow.voteAverage <= 3 ? Color.red : (tvShow.voteAverage < 7 ? Color.orange : Color.green) )
+                                        .fill(movie.voteAverage <= 3 ? Color.red : (movie.voteAverage < 7 ? Color.orange : Color.green) )
                             )
-                            Text(String(format: "%.1f", tvShow.voteAverage)).fontWeight(.semibold)
+                            Text(String(format: "%.1f", movie.voteAverage)).fontWeight(.semibold)
                         }
-                        Text(tvShow.firstAirYearToString).fontWeight(.semibold)
+                        Text(movie.releaseYearToString).fontWeight(.semibold)
                     }
-                    Text(tvShow.overview ?? "")
+                    Text(movie.overview ?? "")
                         .font(.system(size: 12, weight: .regular))
                         .lineLimit(5)
                         .multilineTextAlignment(.center)
@@ -99,37 +96,20 @@ struct TVShowDetails: View {
         }
     }
 
-    var episodes: some View {
-        Group {
-            self.tvShowDetailsViewModel.tvShow.map { tvShow in
-                tvShow.seasons.map { tvSeasons in
-                    VStack(alignment: .leading, spacing: 20) {
-                        ForEach(tvSeasons.sorted {$0.seasonNumber > $1.seasonNumber}, id: \.id) { season in
-                                TVSeasonListView(tvShowId: tvShow.id, tvSeason: season)
-                        }
-                    }
-                }
-            }
-        }.padding(.top, 8)
-        .padding([.leading, .trailing, .bottom], 16)
-    }
-
     var recommendations: some View {
         Group {
-            self.tvShowDetailsViewModel.tvShow.map { tvShow in
-                HorizontalTVShowsListView(tvShowsViewModel: HorizontalTVShowsListViewModel(fetcher: APIEndpoints.recommendationsTVShows(tvShowId: tvShow.id)),
-                                          listName: L10n.Tvshow.Details.recommendations)
+            self.movieDetailsViewModel.movie.map { movie in
+                HorizontalMoviesListView(
+                    horizontalMoviesListViewModel: HorizontalMoviesListViewModel(fetcher: APIEndpoints.recommendationsMovies(movieId: movie.id)),
+                                          listName: L10n.Movie.Details.recommendations)
             }
         }
         .padding(.bottom, 90)
     }
 }
 
-struct TVShowDetails_Previews: PreviewProvider {
+struct MovieDetails_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            Color(.black).edgesIgnoringSafeArea(.all)
-            TVShowDetails(tvShowId: 1402)
-        }
+        MovieDetails(movieId: 330457)
     }
 }
