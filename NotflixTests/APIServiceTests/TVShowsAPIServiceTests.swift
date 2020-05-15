@@ -195,7 +195,7 @@ class TVShowsAPIServiceTests: NotflixTests {
     }
 
     func testFetchTvShowsForGenres() {
-        let publisher = APIClient().send(APIEndpoints.tvShowsForGenres(genreId: 12))
+        let publisher = APIClient().send(APIEndpoints.tvShowsForGenre(genreId: 12))
 
         XCTAssertNotNil(publisher)
 
