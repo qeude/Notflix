@@ -67,7 +67,7 @@ struct TVSeasonListView: View {
                 }
             }
         }
-        .transition(.opacity)
+        .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.5)))
         .padding(.bottom, 40)
     }
 }
@@ -75,7 +75,6 @@ struct TVSeasonListView: View {
 struct TVSeasonListView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            //            Color.black.edgesIgnoringSafeArea(.all)
             TVSeasonListView(tvShowId: 1402,
                              tvSeason: TVSeason(id: 3643,
                                                 name: "Season 1",

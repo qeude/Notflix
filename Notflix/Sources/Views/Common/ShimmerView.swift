@@ -24,7 +24,6 @@ struct ShimmerView: View {
                     self.opacity = 1
                 }
         }
-        
     }
 }
 

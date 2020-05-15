@@ -37,7 +37,7 @@ struct MainView: View {
             }
             .accentColor(.red)
             .font(.headline)
-            .zIndex(9999)
+            .zIndex(0)
             if showSplashScreen {
                 SplashscreenView()
                     .onAppear {
@@ -45,8 +45,8 @@ struct MainView: View {
                             self.showSplashScreen = false
                         }
                 }
-                .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.4)))
-                .zIndex(99999) //Workaround to ensure the transition is working both ways
+                .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.5)))
+                .zIndex(1) //Workaround to ensure the transition is working both ways
             }
         }
     }
