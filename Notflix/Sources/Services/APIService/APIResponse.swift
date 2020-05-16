@@ -37,3 +37,11 @@ struct APIResponseGenres: Decodable {
         case genres
     }
 }
+
+struct APIResponseCredits: Decodable {
+    let cast: [Actor]
+
+    enum CodingKeys: String, CodingKey {
+        case cast
+    }
+}

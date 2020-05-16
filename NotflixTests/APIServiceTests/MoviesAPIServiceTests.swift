@@ -37,7 +37,7 @@ class MoviesAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: 5.0)
     }
 
     func testFetchTopRatedMovies() {
@@ -51,21 +51,21 @@ class MoviesAPIServiceTests: NotflixTests {
         expectationFailure.isInverted = true
 
         let cancellable = publisher.sink (receiveCompletion: { (completion) in
-           switch completion {
-           case .failure:
-               expectationFailure.fulfill()
-           case .finished:
-               expectationFinished.fulfill()
-           }
+            switch completion {
+            case .failure:
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
         }, receiveValue: { response in
-           XCTAssertNotNil(response)
+            XCTAssertNotNil(response)
             XCTAssertGreaterThan(response.results.count, 0)
-           expectationReceive.fulfill()
+            expectationReceive.fulfill()
         })
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 
     func testGetMovie() {
@@ -95,7 +95,7 @@ class MoviesAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
         XCTAssertNotNil(movie)
         XCTAssertEqual(movie?.title, "Schindler's List")
     }
@@ -127,7 +127,7 @@ class MoviesAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 
     func testFetchMovieGenres() {
@@ -155,37 +155,65 @@ class MoviesAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 
     func testFetchMoviesForGenre() {
-           let publisher = APIClient().send(APIEndpoints.moviesForGenre(genreId: 12))
+        let publisher = APIClient().send(APIEndpoints.moviesForGenre(genreId: 12))
 
-           XCTAssertNotNil(publisher)
+        XCTAssertNotNil(publisher)
 
-           let expectationFinished = XCTestExpectation(description: "finished")
-           let expectationReceive = XCTestExpectation(description: "receiveValue")
-           let expectationFailure = XCTestExpectation(description: "failure")
-           expectationFailure.isInverted = true
+        let expectationFinished = XCTestExpectation(description: "finished")
+        let expectationReceive = XCTestExpectation(description: "receiveValue")
+        let expectationFailure = XCTestExpectation(description: "failure")
+        expectationFailure.isInverted = true
 
-           let cancellable = publisher.sink (receiveCompletion: { (completion) in
-               switch completion {
-               case .failure:
-                   expectationFailure.fulfill()
-               case .finished:
-                   expectationFinished.fulfill()
-               }
-           }, receiveValue: { response in
-               XCTAssertNotNil(response)
-               XCTAssertGreaterThan(response.results.count, 0)
-               response.results.forEach { tvShow in
-                   XCTAssert(tvShow.genreIds?.contains(12) == true)
-               }
-               expectationReceive.fulfill()
-           })
-           // Disable never used warning
-           _ = cancellable
+        let cancellable = publisher.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure:
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            XCTAssertGreaterThan(response.results.count, 0)
+            response.results.forEach { tvShow in
+                XCTAssert(tvShow.genreIds?.contains(12) == true)
+            }
+            expectationReceive.fulfill()
+        })
+        // Disable never used warning
+        _ = cancellable
 
-           wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
-       }
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
+    }
+
+    func testGetMovieCredit() {
+        let publisher = APIClient().send(APIEndpoints.movieCredits(movieId: 424))
+
+        XCTAssertNotNil(publisher)
+
+        let expectationFinished = XCTestExpectation(description: "finished")
+        let expectationReceive = XCTestExpectation(description: "receiveValue")
+        let expectationFailure = XCTestExpectation(description: "failure")
+        expectationFailure.isInverted = true
+
+        let cancellable = publisher.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure:
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            XCTAssertGreaterThan(response.cast.count, 0)
+            expectationReceive.fulfill()
+        })
+        // Disable never used warning
+        _ = cancellable
+
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
+    }
 }

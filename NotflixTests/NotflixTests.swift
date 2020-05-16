@@ -11,5 +11,5 @@ import XCTest
 @testable import Notflix
 
 class NotflixTests: XCTestCase {
-
+    let timeout = 2.0
 }

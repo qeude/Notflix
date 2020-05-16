@@ -37,7 +37,7 @@ class TVShowsAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 
     func testFetchTopRatedTVShows() {
@@ -65,7 +65,7 @@ class TVShowsAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 
     func testGetTVShow() {
@@ -95,7 +95,7 @@ class TVShowsAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
         XCTAssertNotNil(tvShow)
         XCTAssertEqual(tvShow?.title, "The Walking Dead")
         guard let seasons = tvShow?.seasons else {
@@ -131,7 +131,7 @@ class TVShowsAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 
     func testGetTVSeason() {
@@ -161,7 +161,7 @@ class TVShowsAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
         XCTAssertNotNil(episodes)
         XCTAssertEqual(episodes?.count, 6)
     }
@@ -191,7 +191,7 @@ class TVShowsAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 
     func testFetchTvShowsForGenre() {
@@ -222,6 +222,6 @@ class TVShowsAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 }
