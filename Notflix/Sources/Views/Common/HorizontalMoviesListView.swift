@@ -39,7 +39,7 @@ struct HorizontalMoviesListView: View {
                                     }
                                 }
                                 .frame(height: 245)
-                                .padding(.leading, 10)
+                                .padding([.leading, .trailing], 10)
                             }
                         }
                     } else {

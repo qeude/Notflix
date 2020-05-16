@@ -23,19 +23,19 @@ struct Movie: Decodable, Identifiable {
     let releaseDate: String?
 
     var posterUrl: URL? {
-           guard let posterPath = posterPath else {
-               return nil
-           }
-           let url = URL(string: "\(APIClient.baseImageStringUrl)\(posterPath)")
-           return url
-       }
-
-       var backdropUrl: URL? {
-           guard let backdropPath = backdropPath else {
-               return nil
-           }
-           return URL(string: "\(APIClient.baseImageStringUrl)\(backdropPath)")
-       }
+        guard let posterPath = posterPath else {
+            return nil
+        }
+        let url = URL(string: "\(APIClient.baseImageStringUrl)\(posterPath)")
+        return url
+    }
+    
+    var backdropUrl: URL? {
+        guard let backdropPath = backdropPath else {
+            return nil
+        }
+        return URL(string: "\(APIClient.baseImageStringUrl)\(backdropPath)")
+    }
 
     var releaseYearToString: String {
         return releaseDate?.split(separator: "-").map(String.init).first ?? ""

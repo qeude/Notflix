@@ -9,10 +9,18 @@
 import Foundation
 struct Actor: Decodable, Identifiable {
     let id: Int
-    let name: String?
-    let character: String?
-    let order: Int?
+    let name: String
+    let character: String
+    let order: Int
     let profilePath: String?
+
+    var profileUrl: URL? {
+        guard let profilePath = profilePath else {
+            return nil
+        }
+        let url = URL(string: "\(APIClient.baseImageStringUrl)\(profilePath)")
+        return url
+    }
 
     enum CodingKeys: String, CodingKey {
         case id

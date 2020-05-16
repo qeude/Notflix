@@ -23,6 +23,7 @@
 "movies.with.genre.title" = "%@ movies";
 
 "movie.details.recommendations" = "Recommendations";
+"movie.details.cast.list" = "Cast";
 
 
 

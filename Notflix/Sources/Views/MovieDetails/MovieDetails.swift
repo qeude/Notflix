@@ -20,8 +20,9 @@ struct MovieDetails: View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
             ScrollView(.vertical, showsIndicators: true) {
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 20) {
                     header
+                    cast
                     recommendations
                 }
             }.edgesIgnoringSafeArea(.all)
@@ -35,7 +36,7 @@ struct MovieDetails: View {
             headerForeground
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 500, alignment: .topLeading)
-        .padding(.bottom, 10)
+//        .padding(.bottom, 10)
         .clipped()
     }
 
@@ -92,6 +93,14 @@ struct MovieDetails: View {
                         .lineLimit(5)
                         .multilineTextAlignment(.center)
                 }.padding([.leading, .trailing, .bottom], 16)
+            }
+        }
+    }
+
+    var cast: some View {
+        Group {
+            self.movieDetailsViewModel.movie.map { movie in
+                MovieCastListView(movieId: movie.id)
             }
         }
     }
