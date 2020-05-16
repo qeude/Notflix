@@ -23,4 +23,11 @@ extension APIEndpoints {
             ]
         )
     }
+    static func searchTVShows(for text: String) -> APIRequest<APIResponseList<TVShow>> {
+           return APIRequest(
+               path: "search/tv",
+               parameters: [
+                   "query": text
+               ]
+           )}
 }

@@ -23,4 +23,11 @@ extension APIEndpoints {
         )
     }
     static func movieCredits(movieId: Int) -> APIRequest<APIResponseCredits> { return APIRequest(path: "movie/\(movieId)/credits")}
+    static func searchMovies(for text: String) -> APIRequest<APIResponseList<Movie>> {
+        return APIRequest(
+            path: "search/movie",
+            parameters: [
+                "query": text
+            ]
+        )}
 }
