@@ -37,7 +37,7 @@ class MoviesAPIServiceTests: NotflixTests {
         // Disable never used warning
         _ = cancellable
 
-        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: 5.0)
+        wait(for: [expectationFinished, expectationReceive, expectationFailure], timeout: self.timeout)
     }
 
     func testFetchTopRatedMovies() {
