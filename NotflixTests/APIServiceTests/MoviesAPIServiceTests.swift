@@ -129,4 +129,63 @@ class MoviesAPIServiceTests: NotflixTests {
 
         wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
     }
+
+    func testFetchMovieGenres() {
+        let publisher = APIClient().send(APIEndpoints.movieGenres)
+
+        XCTAssertNotNil(publisher)
+
+        let expectationFinished = XCTestExpectation(description: "finished")
+        let expectationReceive = XCTestExpectation(description: "receiveValue")
+        let expectationFailure = XCTestExpectation(description: "failure")
+        expectationFailure.isInverted = true
+
+        let cancellable = publisher.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure:
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            XCTAssertGreaterThan(response.genres.count, 0)
+            expectationReceive.fulfill()
+        })
+        // Disable never used warning
+        _ = cancellable
+
+        wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+    }
+
+    func testFetchMoviesForGenre() {
+           let publisher = APIClient().send(APIEndpoints.moviesForGenre(genreId: 12))
+
+           XCTAssertNotNil(publisher)
+
+           let expectationFinished = XCTestExpectation(description: "finished")
+           let expectationReceive = XCTestExpectation(description: "receiveValue")
+           let expectationFailure = XCTestExpectation(description: "failure")
+           expectationFailure.isInverted = true
+
+           let cancellable = publisher.sink (receiveCompletion: { (completion) in
+               switch completion {
+               case .failure:
+                   expectationFailure.fulfill()
+               case .finished:
+                   expectationFinished.fulfill()
+               }
+           }, receiveValue: { response in
+               XCTAssertNotNil(response)
+               XCTAssertGreaterThan(response.results.count, 0)
+               response.results.forEach { tvShow in
+                   XCTAssert(tvShow.genreIds?.contains(12) == true)
+               }
+               expectationReceive.fulfill()
+           })
+           // Disable never used warning
+           _ = cancellable
+
+           wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
+       }
 }

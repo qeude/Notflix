@@ -194,7 +194,7 @@ class TVShowsAPIServiceTests: NotflixTests {
         wait(for: [expectationFinished, expectationReceive], timeout: 5.0)
     }
 
-    func testFetchTvShowsForGenres() {
+    func testFetchTvShowsForGenre() {
         let publisher = APIClient().send(APIEndpoints.tvShowsForGenre(genreId: 12))
 
         XCTAssertNotNil(publisher)
