@@ -29,7 +29,7 @@ struct Movie: Decodable, Identifiable {
         let url = URL(string: "\(APIClient.baseImageStringUrl)\(posterPath)")
         return url
     }
-    
+
     var backdropUrl: URL? {
         guard let backdropPath = backdropPath else {
             return nil

@@ -18,7 +18,7 @@ struct TVShow: Decodable, Identifiable {
     let genres: [Genre]?
     let posterPath: String?
     let backdropPath: String?
-    let firstAirDate: String
+    let firstAirDate: String?
     let seasons: [TVSeason]?
 
     var posterUrl: URL? {
@@ -36,19 +36,8 @@ struct TVShow: Decodable, Identifiable {
         return URL(string: "\(APIClient.baseImageStringUrl)\(backdropPath)")
     }
 
-    var formattedFirstAirDate: Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone.current
-        formatter.locale = Locale.current
-        guard let date = formatter.date(from: self.firstAirDate) else {
-            return nil
-        }
-        return date
-    }
-
     var firstAirYearToString: String {
-        return firstAirDate.split(separator: "-").map(String.init).first ?? ""
+        return firstAirDate?.split(separator: "-").map(String.init).first ?? ""
     }
 
     enum CodingKeys: String, CodingKey {

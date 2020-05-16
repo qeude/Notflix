@@ -10,6 +10,8 @@
 		0115B062247021A0007D0AAE /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115B061247021A0007D0AAE /* Actor.swift */; };
 		0115B06424702921007D0AAE /* MovieCastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115B06324702921007D0AAE /* MovieCastViewModel.swift */; };
 		0115B068247029D3007D0AAE /* MovieCastListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115B067247029D3007D0AAE /* MovieCastListView.swift */; };
+		0115B06A24706715007D0AAE /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115B06924706715007D0AAE /* SearchBar.swift */; };
+		0115B06D247070BD007D0AAE /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115B06C247070BD007D0AAE /* SearchViewModel.swift */; };
 		011A8F8D23DDD2BF00C83627 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A8F8C23DDD2BF00C83627 /* APIClient.swift */; };
 		011A8F8F23DDD36900C83627 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A8F8E23DDD36900C83627 /* APIRequest.swift */; };
 		011A8F9923DDDD8400C83627 /* MoviesAPIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A8F9823DDDD8400C83627 /* MoviesAPIServiceTests.swift */; };
@@ -94,6 +96,8 @@
 		0115B061247021A0007D0AAE /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		0115B06324702921007D0AAE /* MovieCastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastViewModel.swift; sourceTree = "<group>"; };
 		0115B067247029D3007D0AAE /* MovieCastListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastListView.swift; sourceTree = "<group>"; };
+		0115B06924706715007D0AAE /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		0115B06C247070BD007D0AAE /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		011A8F8C23DDD2BF00C83627 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		011A8F8E23DDD36900C83627 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		011A8F9823DDDD8400C83627 /* MoviesAPIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPIServiceTests.swift; sourceTree = "<group>"; };
@@ -178,6 +182,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0115B06B2470709E007D0AAE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				0115B06C247070BD007D0AAE /* SearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		011A8F9723DDDD6500C83627 /* APIServiceTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,6 +458,7 @@
 				01433ED1240DB0BF0003FA6E /* HorizontalTVShowsListView.swift */,
 				018401AD241D22B300EBAB3A /* HorizontalMoviesListView.swift */,
 				015A7487246D65E200147EB2 /* ShimmerView.swift */,
+				0115B06924706715007D0AAE /* SearchBar.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -453,6 +466,7 @@
 		01C9C34D234D2C8100A4C70B /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				0115B06B2470709E007D0AAE /* Search */,
 				016215B3246EB7700037B205 /* Movies */,
 				016215B2246EB75E0037B205 /* TVShows */,
 				019284D22353AF3C00CDC83B /* ImageLoaderViewModel.swift */,
@@ -706,6 +720,7 @@
 				01433EEA240F00DF0003FA6E /* HTTPParameter.swift in Sources */,
 				016215BA246EBAD70037B205 /* MovieDetailsViewModel.swift in Sources */,
 				0115B062247021A0007D0AAE /* Actor.swift in Sources */,
+				0115B06D247070BD007D0AAE /* SearchViewModel.swift in Sources */,
 				014758962419991E0066864D /* APIEndpoints+TVShows.swift in Sources */,
 				019F49C22469EC9C00040EB9 /* TVSeasonListViewModel.swift in Sources */,
 				019284D32353AF3C00CDC83B /* ImageLoaderViewModel.swift in Sources */,
@@ -716,6 +731,7 @@
 				01433EE6240EF6020003FA6E /* ActivityIndicator.swift in Sources */,
 				01433EE4240EF4FA0003FA6E /* AsyncImage.swift in Sources */,
 				01751D6224242BDD00B04BF4 /* MoviePosterImage.swift in Sources */,
+				0115B06A24706715007D0AAE /* SearchBar.swift in Sources */,
 				019F49C024696E0100040EB9 /* TVSeason.swift in Sources */,
 				01553B6B234BCCA10018CDF3 /* Movie.swift in Sources */,
 				01D00F85241E5F31007EA0B9 /* Color.swift in Sources */,
