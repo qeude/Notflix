@@ -56,9 +56,9 @@ struct SearchView: View {
     var loadingView: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack(alignment: .leading, spacing: 10) {
-                ForEach(0..<10, id: \.self) { index in
+                ForEach(0..<10, id: \.self) { _ in
                     HStack(alignment: .center, spacing: 10) {
-                        ForEach(0..<3, id: \.self) { item in
+                        ForEach(0..<3, id: \.self) { _ in
                             self.loadingCell()
                         }
                     }.frame(maxWidth: .infinity)
