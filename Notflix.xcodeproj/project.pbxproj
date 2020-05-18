@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010C40562472F74F001EA0F9 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010C40552472F74F001EA0F9 /* UIApplication.swift */; };
 		0115B062247021A0007D0AAE /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115B061247021A0007D0AAE /* Actor.swift */; };
 		0115B06424702921007D0AAE /* MovieCastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115B06324702921007D0AAE /* MovieCastViewModel.swift */; };
 		0115B068247029D3007D0AAE /* MovieCastListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0115B067247029D3007D0AAE /* MovieCastListView.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		010C40552472F74F001EA0F9 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		0115B061247021A0007D0AAE /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		0115B06324702921007D0AAE /* MovieCastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastViewModel.swift; sourceTree = "<group>"; };
 		0115B067247029D3007D0AAE /* MovieCastListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastListView.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				01D00F84241E5F31007EA0B9 /* Color.swift */,
+				010C40552472F74F001EA0F9 /* UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				01553B41234BCA550018CDF3 /* AppDelegate.swift in Sources */,
 				0115B068247029D3007D0AAE /* MovieCastListView.swift in Sources */,
 				018401B2241D2F3100EBAB3A /* TVShowCell.swift in Sources */,
+				010C40562472F74F001EA0F9 /* UIApplication.swift in Sources */,
 				01751D662424EDB500B04BF4 /* Genre.swift in Sources */,
 				01553B43234BCA550018CDF3 /* SceneDelegate.swift in Sources */,
 				011A8F8F23DDD36900C83627 /* APIRequest.swift in Sources */,

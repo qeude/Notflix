@@ -52,6 +52,7 @@ class ImageLoaderViewModel: ObservableObject {
         }
 
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
+            .retry(10)
             .subscribe(on: ImageLoaderViewModel.imageProcessingQueue)
             .map { UIImage(data: $0.data) }
             .replaceError(with: nil)
