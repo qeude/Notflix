@@ -18,8 +18,7 @@ I've tried to use as few external libraries as possible to learn about concepts.
 * [CocoaLumberjack](https://cocoapods.org/pods/CocoaLumberjack): Logs system
 * [SwiftGen](https://cocoapods.org/pods/SwiftGen): Internationalization, Colors etc...
 
-## 💻 Developers
+## 👨🏻‍💻 Developer
 * Quentin Eude
     * [Github](https://github.com/qeude)
     * [LinkedIn](https://www.linkedin.com/in/quentineude/)
-
