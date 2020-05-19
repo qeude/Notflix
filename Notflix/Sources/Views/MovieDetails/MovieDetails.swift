@@ -36,7 +36,6 @@ struct MovieDetails: View {
             headerForeground
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 500, alignment: .topLeading)
-//        .padding(.bottom, 10)
         .clipped()
     }
 

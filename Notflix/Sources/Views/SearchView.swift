@@ -11,12 +11,6 @@ import SwiftUI
 struct SearchView: View {
     @ObservedObject var searchViewModel = SearchViewModel()
 
-    init() {
-        UITableView.appearance().backgroundColor = .black
-        UITableView.appearance().separatorColor = .black
-        UITableViewCell.appearance().backgroundColor = .black
-    }
-
     var body: some View {
         NavigationView {
             ZStack(alignment: .topLeading) {

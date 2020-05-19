@@ -15,20 +15,25 @@ struct TVShowDetails: View {
 
     init(tvShowId: Int) {
         UIScrollView.appearance().bounces = false
+        UITableView.appearance().backgroundColor = .black
+        UITableView.appearance().separatorColor = .black
+        UITableViewCell.appearance().backgroundColor = .black
         self.tvShowDetailsViewModel = TVShowDetailsViewModel(tvShowId: tvShowId)
     }
 
     var body: some View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack(alignment: .leading, spacing: 10) {
-                    header
-                    episodes
-                    recommendations
-                }
-            }.edgesIgnoringSafeArea(.all)
-                .foregroundColor(.white)
+            List {
+                header
+                    .listRowInsets(EdgeInsets())
+                episodes
+                    .listRowInsets(EdgeInsets())
+                recommendations            .listRowInsets(EdgeInsets())
+
+            }
+            .edgesIgnoringSafeArea(.all)
+            .foregroundColor(.white)
         }
     }
 
@@ -103,11 +108,10 @@ struct TVShowDetails: View {
         Group {
             self.tvShowDetailsViewModel.tvShow.map { tvShow in
                 tvShow.seasons.map { tvSeasons in
-                    VStack(alignment: .leading, spacing: 20) {
                         ForEach(tvSeasons.sorted {$0.seasonNumber > $1.seasonNumber}, id: \.id) { season in
                                 TVSeasonListView(tvShowId: tvShow.id, tvSeason: season)
-                        }
                     }
+                    .frame(maxHeight: .infinity)
                 }
             }
         }.padding(.top, 8)

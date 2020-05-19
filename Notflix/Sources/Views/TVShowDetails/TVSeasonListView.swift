@@ -18,10 +18,11 @@ struct TVSeasonListView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        Group {
             if !self.tvSeasonListViewModel.episodes.isEmpty {
                 Group {
                     Text(self.tvSeasonName).font(.system(size: 32, weight: .bold))
+                        .padding(.top, 30)
                     ForEach (self.tvSeasonListViewModel.episodes.sorted { $0.episodeNumber > $1.episodeNumber }, id: \.id) { episode in
                         HStack(alignment: .top, spacing: 10) {
                             ZStack(alignment: .center) {
@@ -61,6 +62,7 @@ struct TVSeasonListView: View {
             } else {
                 Group {
                     ShimmerView().frame(height: 40)
+                        .padding(.top, 30)
                     ForEach((1...5), id: \.self) { _ in
                         ShimmerView().frame(height: 100)
                     }
@@ -68,7 +70,6 @@ struct TVSeasonListView: View {
             }
         }
         .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.5)))
-        .padding(.bottom, 40)
     }
 }
 
