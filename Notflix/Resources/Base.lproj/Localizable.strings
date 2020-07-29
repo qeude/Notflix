@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  Notflix
+
+  Created by Quentin Eude on 15/03/2020.
+  Copyright © 2020 Quentin Eude. All rights reserved.
+*/
+
+"tab.home" = "Home";
+"tab.search" = "Search";
+
+"home.tab.tvshows" = "TV shows";
+"home.tab.movies" = "Movies";
+
+"tvshows.popular.title" = "Popular TV shows";
+"tvshows.toprated.title" = "Top rated TV shows";
+"tvshows.with.genre.title" = "%@ TV shows";
+
+"tvshow.details.recommendations" = "Recommendations";
+
+"movies.popular.title" = "Popular movies";
+"movies.toprated.title" = "Top rated movies";
+"movies.with.genre.title" = "%@ movies";
+
+"movie.details.recommendations" = "Recommendations";
+"movie.details.cast.list" = "Cast";
+
+
+
